@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+site 'http://community.opscode.com/api/v1'
+
+cookbook 'apt'
+cookbook 'build-essential',
+        :git => 'https://github.com/opscode-cookbooks/build-essential'
+
+cookbook 'mysql'
+cookbook 'apache2'
+cookbook 'git',
+        :git =>'https://github.com/fnichol/chef-git'
+cookbook 'vim'
+
+cookbook 'database'
+cookbook 'chef_gem'
+cookbook 'rvm',
+        :git => 'git://github.com/fnichol/chef-rvm.git'
+cookbook 'php'
+cookbook 'yum', :path => "."
+cookbook 'tandoan', :path => "."
+
