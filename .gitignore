@@ -60,4 +60,4 @@ Thumbs.db
 
 /app/Config/email.php
 /app/Config/database.php
-
+src/html/app/Config/email.php
