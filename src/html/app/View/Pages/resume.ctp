@@ -28,6 +28,15 @@
         </ul>
       </li>
       <li>
+        <div class="job-info h5">Front-End Engineer<br>
+        InternetBrands, El Segundo, CA<br>
+        August 2012
+        </div>
+        <ul>
+          <li>Worked with team to develop www.vbulletin.com</li>
+        </ul>
+      </li>
+      <li>
         <div class="job-info h5">Web Developer<br>
         Internetbrands, El Segundo, CA<br>
         April 2007 - Apirl 2009

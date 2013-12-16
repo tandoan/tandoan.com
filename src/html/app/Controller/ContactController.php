@@ -51,13 +51,13 @@ class ContactController extends AppController {
 	}
 
 	public function email() {
-		$Email = new CakeEmail();
+		$Email = new CakeEmail('smtp');
 		$isSent = $Email->from(array($this->request->data['email'] => $this->request->data['name']))
 			->to('td@tandoan.com')
 		    ->subject('Contact form from tandoan.com '.$this->request->data['name'].$this->request->data['email'].$this->request->data['phone'])
 		    ->send($this->request->data['message']);
 
-		
+
 	}
 
 

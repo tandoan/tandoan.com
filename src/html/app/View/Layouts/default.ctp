@@ -57,9 +57,8 @@ $cakeDescription = __d('cake_dev', 'Tan Doan');
     <div class="container">
   		<div class="header">
 			<ul class="nav nav-pills pull-right">
-			<li class="active"><a href="/">Home</a></li>
-			<li><a href="/resume/">Resume</a></li>
-			<li><a href="/contact/">Contact</a></li>
+				<li <?php if($indexActive) echo 'class="active"';?>><a href="/">Home</a></li>
+				<li <?php if($resumeActive) echo 'class="active"';?>><a href="/resume/">Resume</a></li>
 			</ul>
 			<h3 class="text-muted">Tan Doan</h3>
 		</div>

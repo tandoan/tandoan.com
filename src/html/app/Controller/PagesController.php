@@ -62,8 +62,11 @@ class PagesController extends AppController {
 		if (!empty($path[$count - 1])) {
 			$title_for_layout = Inflector::humanize($path[$count - 1]);
 		}
+
+
 		$this->set(compact('page', 'subpage', 'title_for_layout'));
 
+		$this->setActiveMenu($page);
 		try {
 			$this->render(implode('/', $path));
 		} catch (MissingViewException $e) {
@@ -71,6 +74,20 @@ class PagesController extends AppController {
 				throw $e;
 			}
 			throw new NotFoundException();
+		}
+	}
+
+	protected function setActiveMenu($path){
+		$this->set('resumeActive', false);
+		$this->set('indexActive', false);
+		switch($path){
+			case 'resume':
+				$this->set('resumeActive', true);
+			break;
+			case 'index':
+			default:
+				$this->set('indexActive', true);
+			break;		
 		}
 	}
 
