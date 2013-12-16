@@ -86,6 +86,7 @@
       <li>Capistrano</li>
       <li>Ant</li>
       <li>Cucumber</li>
+      <li>Magento</li>
     </ul>
   </li>
   <li><h4>Social Links</h4>
