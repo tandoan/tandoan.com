@@ -69,13 +69,13 @@
   
     <div class="row">
       <div class="col-md-4">
-        Agile Development
-      </div>
-      <div class="col-md-4">
-       The LAMP stack
+        The LAMP Stack
       </div>
       <div class="col-md-4">
        Object Oriented PHP
+      </div>
+      <div class="col-md-4">
+       Agile Development
       </div>
     </div>
 
@@ -84,40 +84,52 @@
         Javascript
       </div>
       <div class="col-md-4">
-       AJAX
+       JQuery
       </div>
       <div class="col-md-4">
-       Service Oriented Architecture
+       AJAX
+      </div>
+    </div>
+
+   <div class="row">
+      <div class="col-md-4">
+        Postgresql
+      </div>
+      <div class="col-md-4">
+       Mysql
+      </div>
+      <div class="col-md-4">
+       HTML
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-4">
-        Continuous Integration
-      </div>
-      <div class="col-md-4">
-       Jira
+        TDD
       </div>
       <div class="col-md-4">
        PHPUnit
+      </div>
+      <div class="col-md-4">
+       Continuous Integration
+      </div>
+    </div>
+
+     <div class="row">
+      <div class="col-md-4">
+        BDD
+      </div>
+      <div class="col-md-4">
+       Cucumber
+      </div>
+      <div class="col-md-4">
+        Behat
       </div>
     </div>
 
      <div class="row">
       <div class="col-md-4">
         Mink
-      </div>
-      <div class="col-md-4">
-       Behat
-      </div>
-      <div class="col-md-4">
-        JQuery
-      </div>
-    </div>
-
-     <div class="row">
-      <div class="col-md-4">
-        Postgresql
       </div>
       <div class="col-md-4">
        Git
@@ -129,7 +141,7 @@
 
      <div class="row">
       <div class="col-md-4">
-        HTML
+        Selenium
       </div>
       <div class="col-md-4">
        CSS
@@ -149,7 +161,18 @@
       <div class="col-md-4">
        Magento
       </div>
+    </div>    
+
+    <div class="row">
+      <div class="col-md-4">
+        Ruby
+      </div>
+      <div class="col-md-4">
+       Rails
+      </div>
+      
     </div>
+
   </div>
 </div>
 
