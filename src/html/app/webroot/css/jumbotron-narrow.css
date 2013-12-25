@@ -59,6 +59,16 @@ body {
   margin-top: 28px;
 }
 
+.resume-block {
+  margin: 40px 0;
+  padding-bottom:39px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.resume-block-omega {
+  margin: 40px 0;
+  
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
@@ -106,3 +116,4 @@ body {
   margin-bottom: 15px;
   padding: 7px 9px;
 }
+
