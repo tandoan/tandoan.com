@@ -35,6 +35,7 @@
       </div>
       <ul>
         <li>Worked with team to develop www.vbulletin.com</li>
+        <li>Created and styled CMS content pages in Magento</li>
       </ul>
 
       <div class="job-info h5">Web Developer<br>

@@ -117,3 +117,11 @@ body {
   padding: 7px 9px;
 }
 
+.job-info {
+  padding-bottom: 5px;
+}
+
+.resume-block .col-md-2.h4,
+.resume-block-omega .col-md-2.h4 {
+  color: #999999;
+}
