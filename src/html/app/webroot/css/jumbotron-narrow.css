@@ -119,6 +119,7 @@ body {
 
 .job-info {
   padding-bottom: 5px;
+  font-weight:bold;
 }
 
 .resume-block .col-md-2.h4,

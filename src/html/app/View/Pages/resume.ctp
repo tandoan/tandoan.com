@@ -2,13 +2,12 @@
 <div class="row resume-block">
   <div class="col-md-2 h4">Profile</div>
   <div class="col-md-10">
-    <p>For nearly a decade, I&apos;ve built webapps as the sole engineer, team lead, or a member of a small team.</p>
+    <p>For nearly a decade, I&apos;ve built webapps as the sole engineer, team lead, or member of a small team.</p>
 
     <p>My passion has evolved from grinding out code to designing and building robust systems, as well as trying to put processes in place to bake quality in.  I&apos;ve mentored juniors, lead code reviews, implemented TDD, BDD, and CI.</p>
 
-    <p>After spending the last few months traveling and balancing my life, I am ready to start building again.</p>
+<p>I took a sabbatical in 2013 to travel the world, rock climb in some unique locations, and connect with entrepreneurs in different countries.  I returned with a different perspective and the desire to pursue exciting opportunities anywhere they are available.</p>
 
-    <p>Currently, I am looking for opportunities in a great city with a great team.  Barring that, I am also open to working remotely.</p>
   </div>
 </div>
 
@@ -21,11 +20,12 @@
       April 2009 - January 2013
       </div>
       <ul>
-        <li>Lead a quality improvement effort utilizing TDD, BDD, CI, and code reviews</li>
-        <li>Worked with team to build a SaaS application to help lenders manage the appraisal process</li>
+        <li>Led a quality improvement effort utilizing TDD (PHPUnit), BDD (Cucumber, Behat), CI (Bamboo), automation of user acceptance testing (Selenium, Watir, Mink) and code reviews</li>
+        <li>Worked with team to build a SaaS application (LAMP stack) to help lenders manage the appraisal process</li>
         <li>Mentored junior developers</li>
         <li>Maintained servers</li>
-        <li>DBA</li>
+        <li>DBA (Postgresql)</li>
+        <li>Simplified change management and code pushes (Capistrano, ANT, custom bash scripts)</li>
       </ul>
       
 
@@ -35,20 +35,21 @@
       </div>
       <ul>
         <li>Worked with team to develop www.vbulletin.com</li>
-        <li>Created and styled CMS content pages in Magento</li>
+        <li>Created and styled CMS content pages in Magento (PHP, HTML, CSS, JS)</li>
       </ul>
 
       <div class="job-info h5">Web Developer<br>
-      Internetbrands, El Segundo, CA<br>
-      April 2007 - Apirl 2009
+      InternetBrands, El Segundo, CA<br>
+      April 2007 - April 2009
       </div>
       <ul>
-        <li>Worked with team to develop and maintain loan.com, loanapp.com, epodunk.com, internetbrands.com, realestateabc.com/home-values, and others</li>
+        <li>Worked with team to develop and maintain loan.com, loanapp.com, epodunk.com, internetbrands.com, realestateabc.com/home-values, and others (PHP, JQuery, MooTools)</li>
         <li>Wrote and troubleshot complex Oracle queries for business reports</li>
-        <li>Developed widgets</li>
-        <li>Write web services and libraries for various uses on IB websites</li>
-        <li>Debug and fox cross-browser CSS/JS issues</li>
+        <li>Developed widgets (JS)</li>
+        <li>Wrote web services and libraries for various uses on IB websites</li>
+        <li>Debugged and fixed cross-browser CSS/JS issues</li>
         <li>Basic Apache and Linux administration</li>
+        <li>Worked on a project that indexed IB content and served up related content (Lucene, Nutch, Sphinx, JS)</li>
       </ul>
 
       <div class="job-info h5">Full Stack Engineer<br>
@@ -65,72 +66,24 @@
   </div>
   <div class="row resume-block">  
 
-  <div class="col-md-2 h4">Skills</div>
+  <div class="col-md-2 h4">Other Skills</div>
   <div class="col-md-10">
   
     <div class="row">
       <div class="col-md-4">
-        The LAMP Stack
+        Ruby
       </div>
       <div class="col-md-4">
-       Object Oriented PHP
+       Rails
       </div>
       <div class="col-md-4">
-       Agile Development
-      </div>
-    </div>
-
-   <div class="row">
-      <div class="col-md-4">
-        Javascript
-      </div>
-      <div class="col-md-4">
-       JQuery
-      </div>
-      <div class="col-md-4">
-       AJAX
+       Capybara
       </div>
     </div>
 
    <div class="row">
       <div class="col-md-4">
-        Postgresql
-      </div>
-      <div class="col-md-4">
-       Mysql
-      </div>
-      <div class="col-md-4">
-       HTML
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        TDD
-      </div>
-      <div class="col-md-4">
-       PHPUnit
-      </div>
-      <div class="col-md-4">
-       Continuous Integration
-      </div>
-    </div>
-
-     <div class="row">
-      <div class="col-md-4">
-        BDD
-      </div>
-      <div class="col-md-4">
-       Cucumber
-      </div>
-      <div class="col-md-4">
-        Behat
-      </div>
-    </div>
-
-     <div class="row">
-      <div class="col-md-4">
-        Mink
+        PhantomJS
       </div>
       <div class="col-md-4">
        Git
@@ -140,40 +93,42 @@
       </div>
     </div>
 
-     <div class="row">
+   <div class="row">
       <div class="col-md-4">
-        Selenium
+        Linux
       </div>
       <div class="col-md-4">
-       CSS
+        Android
       </div>
       <div class="col-md-4">
-       Capistrano
+        Titanium SDK
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-4">
+        Marmalade SDK
+      </div>
+      <div class="col-md-4">
+        CakePHP
+      </div>
+      <div class="col-md-4">
+        Yii
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-4">
-        Ant
+        Vagrant
       </div>
       <div class="col-md-4">
-       Cucumber
+        Chef-solo
       </div>
       <div class="col-md-4">
-       Magento
       </div>
-    </div>    
-
-    <div class="row">
-      <div class="col-md-4">
-        Ruby
-      </div>
-      <div class="col-md-4">
-       Rails
-      </div>
-      
     </div>
 
+ 
   </div>
 </div>
 
