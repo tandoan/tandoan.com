@@ -22,6 +22,8 @@
       <ul>
         <li>Led a quality improvement effort utilizing TDD (PHPUnit), BDD (Cucumber, Behat), CI (Bamboo), automation of user acceptance testing (Selenium, Watir, Mink) and code reviews</li>
         <li>Worked with team to build a SaaS application (LAMP stack) to help lenders manage the appraisal process</li>
+	<li>Implemented InHouse&apos;s Connexions API for client integration</li>
+        <li>Implemented services to send and receive data to/from Fannie Mae/Freddie Mac through UCDP API</li>
         <li>Mentored junior developers</li>
         <li>Maintained servers</li>
         <li>DBA (Postgresql)</li>
