@@ -7,7 +7,7 @@
     position: relative;
     margin: 30px 0;
     font-size: 0;
-    background: url("/assets/img/board-bkg-clear.png") center center no-repeat;
+    background: url("/cribbage/assets/img/board-bkg-clear.png") center center no-repeat;
     background-size: contain;
     clear: both
 }
@@ -1089,7 +1089,7 @@
 }
 
 #cribbage-board.classic {
-    background-image: url("/assets/img/board-bkg-classic.png");
+    background-image: url("/cribbage/assets/img/board-bkg-classic.png");
     box-shadow: 4px 4px 5px 3px rgba(0, 0, 0, 0.25)
 }
 
@@ -1117,7 +1117,7 @@
     bottom: -200%;
     width: 250%;
     height: 250%;
-    background: url("/assets/img/peg_shadow.png");
+    background: url("/cribbage/assets/img/peg_shadow.png");
     background-size: contain;
     z-index: -1
 }
@@ -1241,7 +1241,7 @@
     left: 10%;
     height: 30px;
     width: 80%;
-    background: url("/assets/img/stinkline.svg") repeat;
+    background: url("/cribbage/assets/img/stinkline.svg") repeat;
     background-size: 15px 30px;
     animation: fadeIn 2s 1, backgroundScroll 3s linear infinite;
     box-shadow: inset 0px 0px 2px 2px #fff;
@@ -1339,7 +1339,7 @@
 
 .skunked .scoreboard .score:after {
     content: '';
-    background: url("/assets/img/skunk.svg") repeat;
+    background: url("/cribbage/assets/img/skunk.svg") repeat;
     background-size: 20px;
     width: 20px;
     height: 20px;
