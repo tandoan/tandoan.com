@@ -1,0 +1,1584 @@
+#instructions {
+    display: none;
+    position: relative
+}
+
+#cribbage-board {
+    position: relative;
+    margin: 30px 0;
+    font-size: 0;
+    background: url("/assets/img/board-bkg-clear.png") center center no-repeat;
+    background-size: contain;
+    clear: both
+}
+
+#cribbage-board .right-turn-box {
+    display: inline-block;
+    width: 26.66667%;
+    padding-bottom: 26.66667%;
+    vertical-align: top
+}
+
+#board-wrapper, #bar-board {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0
+}
+
+.dot, .peg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.61778%;
+    height: 0;
+    padding-bottom: 1.61778%
+}
+
+.dot .dot-droppable {
+    position: absolute;
+    top: -14%;
+    right: -14%;
+    bottom: -14%;
+    left: -14%
+}
+
+.peg {
+    -webkit-transition: -webkit-transform 0.42s;
+    transition: -webkit-transform 0.42s;
+    transition: transform 0.42s;
+    transition: transform 0.42s, -webkit-transform 0.42s;
+    z-index: 1;
+    border-radius: 50%
+}
+
+.peg .handle {
+    position: absolute;
+    top: -14%;
+    right: -14%;
+    bottom: -14%;
+    left: -14%;
+    border-radius: 50%
+}
+
+.peg.p1 .handle {
+    background: #f44336
+}
+
+.peg.p2 .handle {
+    background: #1565c0
+}
+
+.peg.draggable .handle {
+    cursor: pointer
+}
+
+.peg.dragging {
+    -webkit-transform: none !important;
+    transform: none !important
+}
+
+.peg.dragging, .peg.dragged {
+    -webkit-transition: none !important;
+    transition: none !important
+}
+
+.dot--1.p1, .peg[data-pt="-1"].p1 {
+    transform: translate(291.40659%, 125.82418%)
+}
+
+.dot--1.p2, .peg[data-pt="-1"].p2 {
+    transform: translate(291.40659%, 323.62637%)
+}
+
+.dot-0.p1, .peg[data-pt="0"].p1 {
+    transform: translate(416.40659%, 125.82418%)
+}
+
+.dot-0.p2, .peg[data-pt="0"].p2 {
+    transform: translate(416.40659%, 323.62637%)
+}
+
+.dot-1.p1, .peg[data-pt="1"].p1 {
+    transform: translate(603.21978%, 125.82418%)
+}
+
+.dot-1.p2, .peg[data-pt="1"].p2 {
+    transform: translate(603.21978%, 323.62637%)
+}
+
+.dot-2.p1, .peg[data-pt="2"].p1 {
+    transform: translate(728.21978%, 125.82418%)
+}
+
+.dot-2.p2, .peg[data-pt="2"].p2 {
+    transform: translate(728.21978%, 323.62637%)
+}
+
+.dot-3.p1, .peg[data-pt="3"].p1 {
+    transform: translate(853.21978%, 125.82418%)
+}
+
+.dot-3.p2, .peg[data-pt="3"].p2 {
+    transform: translate(853.21978%, 323.62637%)
+}
+
+.dot-4.p1, .peg[data-pt="4"].p1 {
+    transform: translate(978.21978%, 125.82418%)
+}
+
+.dot-4.p2, .peg[data-pt="4"].p2 {
+    transform: translate(978.21978%, 323.62637%)
+}
+
+.dot-5.p1, .peg[data-pt="5"].p1 {
+    transform: translate(1103.21978%, 125.82418%)
+}
+
+.dot-5.p2, .peg[data-pt="5"].p2 {
+    transform: translate(1103.21978%, 323.62637%)
+}
+
+.dot-6.p1, .peg[data-pt="6"].p1 {
+    transform: translate(1290.03297%, 125.82418%)
+}
+
+.dot-6.p2, .peg[data-pt="6"].p2 {
+    transform: translate(1290.03297%, 323.62637%)
+}
+
+.dot-7.p1, .peg[data-pt="7"].p1 {
+    transform: translate(1415.03297%, 125.82418%)
+}
+
+.dot-7.p2, .peg[data-pt="7"].p2 {
+    transform: translate(1415.03297%, 323.62637%)
+}
+
+.dot-8.p1, .peg[data-pt="8"].p1 {
+    transform: translate(1540.03297%, 125.82418%)
+}
+
+.dot-8.p2, .peg[data-pt="8"].p2 {
+    transform: translate(1540.03297%, 323.62637%)
+}
+
+.dot-9.p1, .peg[data-pt="9"].p1 {
+    transform: translate(1665.03297%, 125.82418%)
+}
+
+.dot-9.p2, .peg[data-pt="9"].p2 {
+    transform: translate(1665.03297%, 323.62637%)
+}
+
+.dot-10.p1, .peg[data-pt="10"].p1 {
+    transform: translate(1790.03297%, 125.82418%)
+}
+
+.dot-10.p2, .peg[data-pt="10"].p2 {
+    transform: translate(1790.03297%, 323.62637%)
+}
+
+.dot-11.p1, .peg[data-pt="11"].p1 {
+    transform: translate(1976.84615%, 125.82418%)
+}
+
+.dot-11.p2, .peg[data-pt="11"].p2 {
+    transform: translate(1976.84615%, 323.62637%)
+}
+
+.dot-12.p1, .peg[data-pt="12"].p1 {
+    transform: translate(2101.84615%, 125.82418%)
+}
+
+.dot-12.p2, .peg[data-pt="12"].p2 {
+    transform: translate(2101.84615%, 323.62637%)
+}
+
+.dot-13.p1, .peg[data-pt="13"].p1 {
+    transform: translate(2226.84615%, 125.82418%)
+}
+
+.dot-13.p2, .peg[data-pt="13"].p2 {
+    transform: translate(2226.84615%, 323.62637%)
+}
+
+.dot-14.p1, .peg[data-pt="14"].p1 {
+    transform: translate(2351.84615%, 125.82418%)
+}
+
+.dot-14.p2, .peg[data-pt="14"].p2 {
+    transform: translate(2351.84615%, 323.62637%)
+}
+
+.dot-15.p1, .peg[data-pt="15"].p1 {
+    transform: translate(2476.84615%, 125.82418%)
+}
+
+.dot-15.p2, .peg[data-pt="15"].p2 {
+    transform: translate(2476.84615%, 323.62637%)
+}
+
+.dot-16.p1, .peg[data-pt="16"].p1 {
+    transform: translate(2663.65934%, 125.82418%)
+}
+
+.dot-16.p2, .peg[data-pt="16"].p2 {
+    transform: translate(2663.65934%, 323.62637%)
+}
+
+.dot-17.p1, .peg[data-pt="17"].p1 {
+    transform: translate(2788.65934%, 125.82418%)
+}
+
+.dot-17.p2, .peg[data-pt="17"].p2 {
+    transform: translate(2788.65934%, 323.62637%)
+}
+
+.dot-18.p1, .peg[data-pt="18"].p1 {
+    transform: translate(2913.65934%, 125.82418%)
+}
+
+.dot-18.p2, .peg[data-pt="18"].p2 {
+    transform: translate(2913.65934%, 323.62637%)
+}
+
+.dot-19.p1, .peg[data-pt="19"].p1 {
+    transform: translate(3038.65934%, 125.82418%)
+}
+
+.dot-19.p2, .peg[data-pt="19"].p2 {
+    transform: translate(3038.65934%, 323.62637%)
+}
+
+.dot-20.p1, .peg[data-pt="20"].p1 {
+    transform: translate(3163.65934%, 125.82418%)
+}
+
+.dot-20.p2, .peg[data-pt="20"].p2 {
+    transform: translate(3163.65934%, 323.62637%)
+}
+
+.dot-21.p1, .peg[data-pt="21"].p1 {
+    transform: translate(3350.47253%, 125.82418%)
+}
+
+.dot-21.p2, .peg[data-pt="21"].p2 {
+    transform: translate(3350.47253%, 323.62637%)
+}
+
+.dot-22.p1, .peg[data-pt="22"].p1 {
+    transform: translate(3475.47253%, 125.82418%)
+}
+
+.dot-22.p2, .peg[data-pt="22"].p2 {
+    transform: translate(3475.47253%, 323.62637%)
+}
+
+.dot-23.p1, .peg[data-pt="23"].p1 {
+    transform: translate(3600.47253%, 125.82418%)
+}
+
+.dot-23.p2, .peg[data-pt="23"].p2 {
+    transform: translate(3600.47253%, 323.62637%)
+}
+
+.dot-24.p1, .peg[data-pt="24"].p1 {
+    transform: translate(3725.47253%, 125.82418%)
+}
+
+.dot-24.p2, .peg[data-pt="24"].p2 {
+    transform: translate(3725.47253%, 323.62637%)
+}
+
+.dot-25.p1, .peg[data-pt="25"].p1 {
+    transform: translate(3850.47253%, 125.82418%)
+}
+
+.dot-25.p2, .peg[data-pt="25"].p2 {
+    transform: translate(3850.47253%, 323.62637%)
+}
+
+.dot-26.p1, .peg[data-pt="26"].p1 {
+    transform: translate(4037.28571%, 125.82418%)
+}
+
+.dot-26.p2, .peg[data-pt="26"].p2 {
+    transform: translate(4037.28571%, 323.62637%)
+}
+
+.dot-27.p1, .peg[data-pt="27"].p1 {
+    transform: translate(4162.28571%, 125.82418%)
+}
+
+.dot-27.p2, .peg[data-pt="27"].p2 {
+    transform: translate(4162.28571%, 323.62637%)
+}
+
+.dot-28.p1, .peg[data-pt="28"].p1 {
+    transform: translate(4287.28571%, 125.82418%)
+}
+
+.dot-28.p2, .peg[data-pt="28"].p2 {
+    transform: translate(4287.28571%, 323.62637%)
+}
+
+.dot-29.p1, .peg[data-pt="29"].p1 {
+    transform: translate(4412.28571%, 125.82418%)
+}
+
+.dot-29.p2, .peg[data-pt="29"].p2 {
+    transform: translate(4412.28571%, 323.62637%)
+}
+
+.dot-30.p1, .peg[data-pt="30"].p1 {
+    transform: translate(4537.28571%, 125.82418%)
+}
+
+.dot-30.p2, .peg[data-pt="30"].p2 {
+    transform: translate(4537.28571%, 323.62637%)
+}
+
+.dot-31.p1, .peg[data-pt="31"].p1 {
+    transform: translate(4724.0989%, 125.82418%)
+}
+
+.dot-31.p2, .peg[data-pt="31"].p2 {
+    transform: translate(4724.0989%, 323.62637%)
+}
+
+.dot-32.p1, .peg[data-pt="32"].p1 {
+    transform: translate(4849.0989%, 125.82418%)
+}
+
+.dot-32.p2, .peg[data-pt="32"].p2 {
+    transform: translate(4849.0989%, 323.62637%)
+}
+
+.dot-33.p1, .peg[data-pt="33"].p1 {
+    transform: translate(4974.0989%, 125.82418%)
+}
+
+.dot-33.p2, .peg[data-pt="33"].p2 {
+    transform: translate(4974.0989%, 323.62637%)
+}
+
+.dot-34.p1, .peg[data-pt="34"].p1 {
+    transform: translate(5099.0989%, 125.82418%)
+}
+
+.dot-34.p2, .peg[data-pt="34"].p2 {
+    transform: translate(5099.0989%, 323.62637%)
+}
+
+.dot-35.p1, .peg[data-pt="35"].p1 {
+    transform: translate(5224.0989%, 125.82418%)
+}
+
+.dot-35.p2, .peg[data-pt="35"].p2 {
+    transform: translate(5224.0989%, 323.62637%)
+}
+
+.dot-46.p1, .peg[data-pt="46"].p1 {
+    transform: translate(5224.0989%, 1422.52747%)
+}
+
+.dot-46.p2, .peg[data-pt="46"].p2 {
+    transform: translate(5224.0989%, 1224.72527%)
+}
+
+.dot-47.p1, .peg[data-pt="47"].p1 {
+    transform: translate(5099.0989%, 1422.52747%)
+}
+
+.dot-47.p2, .peg[data-pt="47"].p2 {
+    transform: translate(5099.0989%, 1224.72527%)
+}
+
+.dot-48.p1, .peg[data-pt="48"].p1 {
+    transform: translate(4974.0989%, 1422.52747%)
+}
+
+.dot-48.p2, .peg[data-pt="48"].p2 {
+    transform: translate(4974.0989%, 1224.72527%)
+}
+
+.dot-49.p1, .peg[data-pt="49"].p1 {
+    transform: translate(4849.0989%, 1422.52747%)
+}
+
+.dot-49.p2, .peg[data-pt="49"].p2 {
+    transform: translate(4849.0989%, 1224.72527%)
+}
+
+.dot-50.p1, .peg[data-pt="50"].p1 {
+    transform: translate(4724.0989%, 1422.52747%)
+}
+
+.dot-50.p2, .peg[data-pt="50"].p2 {
+    transform: translate(4724.0989%, 1224.72527%)
+}
+
+.dot-51.p1, .peg[data-pt="51"].p1 {
+    transform: translate(4537.28571%, 1422.52747%)
+}
+
+.dot-51.p2, .peg[data-pt="51"].p2 {
+    transform: translate(4537.28571%, 1224.72527%)
+}
+
+.dot-52.p1, .peg[data-pt="52"].p1 {
+    transform: translate(4412.28571%, 1422.52747%)
+}
+
+.dot-52.p2, .peg[data-pt="52"].p2 {
+    transform: translate(4412.28571%, 1224.72527%)
+}
+
+.dot-53.p1, .peg[data-pt="53"].p1 {
+    transform: translate(4287.28571%, 1422.52747%)
+}
+
+.dot-53.p2, .peg[data-pt="53"].p2 {
+    transform: translate(4287.28571%, 1224.72527%)
+}
+
+.dot-54.p1, .peg[data-pt="54"].p1 {
+    transform: translate(4162.28571%, 1422.52747%)
+}
+
+.dot-54.p2, .peg[data-pt="54"].p2 {
+    transform: translate(4162.28571%, 1224.72527%)
+}
+
+.dot-55.p1, .peg[data-pt="55"].p1 {
+    transform: translate(4037.28571%, 1422.52747%)
+}
+
+.dot-55.p2, .peg[data-pt="55"].p2 {
+    transform: translate(4037.28571%, 1224.72527%)
+}
+
+.dot-56.p1, .peg[data-pt="56"].p1 {
+    transform: translate(3850.47253%, 1422.52747%)
+}
+
+.dot-56.p2, .peg[data-pt="56"].p2 {
+    transform: translate(3850.47253%, 1224.72527%)
+}
+
+.dot-57.p1, .peg[data-pt="57"].p1 {
+    transform: translate(3725.47253%, 1422.52747%)
+}
+
+.dot-57.p2, .peg[data-pt="57"].p2 {
+    transform: translate(3725.47253%, 1224.72527%)
+}
+
+.dot-58.p1, .peg[data-pt="58"].p1 {
+    transform: translate(3600.47253%, 1422.52747%)
+}
+
+.dot-58.p2, .peg[data-pt="58"].p2 {
+    transform: translate(3600.47253%, 1224.72527%)
+}
+
+.dot-59.p1, .peg[data-pt="59"].p1 {
+    transform: translate(3475.47253%, 1422.52747%)
+}
+
+.dot-59.p2, .peg[data-pt="59"].p2 {
+    transform: translate(3475.47253%, 1224.72527%)
+}
+
+.dot-60.p1, .peg[data-pt="60"].p1 {
+    transform: translate(3350.47253%, 1422.52747%)
+}
+
+.dot-60.p2, .peg[data-pt="60"].p2 {
+    transform: translate(3350.47253%, 1224.72527%)
+}
+
+.dot-61.p1, .peg[data-pt="61"].p1 {
+    transform: translate(3163.65934%, 1422.52747%)
+}
+
+.dot-61.p2, .peg[data-pt="61"].p2 {
+    transform: translate(3163.65934%, 1224.72527%)
+}
+
+.dot-62.p1, .peg[data-pt="62"].p1 {
+    transform: translate(3038.65934%, 1422.52747%)
+}
+
+.dot-62.p2, .peg[data-pt="62"].p2 {
+    transform: translate(3038.65934%, 1224.72527%)
+}
+
+.dot-63.p1, .peg[data-pt="63"].p1 {
+    transform: translate(2913.65934%, 1422.52747%)
+}
+
+.dot-63.p2, .peg[data-pt="63"].p2 {
+    transform: translate(2913.65934%, 1224.72527%)
+}
+
+.dot-64.p1, .peg[data-pt="64"].p1 {
+    transform: translate(2788.65934%, 1422.52747%)
+}
+
+.dot-64.p2, .peg[data-pt="64"].p2 {
+    transform: translate(2788.65934%, 1224.72527%)
+}
+
+.dot-65.p1, .peg[data-pt="65"].p1 {
+    transform: translate(2663.65934%, 1422.52747%)
+}
+
+.dot-65.p2, .peg[data-pt="65"].p2 {
+    transform: translate(2663.65934%, 1224.72527%)
+}
+
+.dot-66.p1, .peg[data-pt="66"].p1 {
+    transform: translate(2476.84615%, 1422.52747%)
+}
+
+.dot-66.p2, .peg[data-pt="66"].p2 {
+    transform: translate(2476.84615%, 1224.72527%)
+}
+
+.dot-67.p1, .peg[data-pt="67"].p1 {
+    transform: translate(2351.84615%, 1422.52747%)
+}
+
+.dot-67.p2, .peg[data-pt="67"].p2 {
+    transform: translate(2351.84615%, 1224.72527%)
+}
+
+.dot-68.p1, .peg[data-pt="68"].p1 {
+    transform: translate(2226.84615%, 1422.52747%)
+}
+
+.dot-68.p2, .peg[data-pt="68"].p2 {
+    transform: translate(2226.84615%, 1224.72527%)
+}
+
+.dot-69.p1, .peg[data-pt="69"].p1 {
+    transform: translate(2101.84615%, 1422.52747%)
+}
+
+.dot-69.p2, .peg[data-pt="69"].p2 {
+    transform: translate(2101.84615%, 1224.72527%)
+}
+
+.dot-70.p1, .peg[data-pt="70"].p1 {
+    transform: translate(1976.84615%, 1422.52747%)
+}
+
+.dot-70.p2, .peg[data-pt="70"].p2 {
+    transform: translate(1976.84615%, 1224.72527%)
+}
+
+.dot-71.p1, .peg[data-pt="71"].p1 {
+    transform: translate(1790.03297%, 1422.52747%)
+}
+
+.dot-71.p2, .peg[data-pt="71"].p2 {
+    transform: translate(1790.03297%, 1224.72527%)
+}
+
+.dot-72.p1, .peg[data-pt="72"].p1 {
+    transform: translate(1665.03297%, 1422.52747%)
+}
+
+.dot-72.p2, .peg[data-pt="72"].p2 {
+    transform: translate(1665.03297%, 1224.72527%)
+}
+
+.dot-73.p1, .peg[data-pt="73"].p1 {
+    transform: translate(1540.03297%, 1422.52747%)
+}
+
+.dot-73.p2, .peg[data-pt="73"].p2 {
+    transform: translate(1540.03297%, 1224.72527%)
+}
+
+.dot-74.p1, .peg[data-pt="74"].p1 {
+    transform: translate(1415.03297%, 1422.52747%)
+}
+
+.dot-74.p2, .peg[data-pt="74"].p2 {
+    transform: translate(1415.03297%, 1224.72527%)
+}
+
+.dot-75.p1, .peg[data-pt="75"].p1 {
+    transform: translate(1290.03297%, 1422.52747%)
+}
+
+.dot-75.p2, .peg[data-pt="75"].p2 {
+    transform: translate(1290.03297%, 1224.72527%)
+}
+
+.dot-76.p1, .peg[data-pt="76"].p1 {
+    transform: translate(1103.21978%, 1422.52747%)
+}
+
+.dot-76.p2, .peg[data-pt="76"].p2 {
+    transform: translate(1103.21978%, 1224.72527%)
+}
+
+.dot-77.p1, .peg[data-pt="77"].p1 {
+    transform: translate(978.21978%, 1422.52747%)
+}
+
+.dot-77.p2, .peg[data-pt="77"].p2 {
+    transform: translate(978.21978%, 1224.72527%)
+}
+
+.dot-78.p1, .peg[data-pt="78"].p1 {
+    transform: translate(853.21978%, 1422.52747%)
+}
+
+.dot-78.p2, .peg[data-pt="78"].p2 {
+    transform: translate(853.21978%, 1224.72527%)
+}
+
+.dot-79.p1, .peg[data-pt="79"].p1 {
+    transform: translate(728.21978%, 1422.52747%)
+}
+
+.dot-79.p2, .peg[data-pt="79"].p2 {
+    transform: translate(728.21978%, 1224.72527%)
+}
+
+.dot-80.p1, .peg[data-pt="80"].p1 {
+    transform: translate(603.21978%, 1422.52747%)
+}
+
+.dot-80.p2, .peg[data-pt="80"].p2 {
+    transform: translate(603.21978%, 1224.72527%)
+}
+
+.dot-86.p1, .peg[data-pt="86"].p1 {
+    transform: translate(603.21978%, 675.27473%)
+}
+
+.dot-86.p2, .peg[data-pt="86"].p2 {
+    transform: translate(603.21978%, 873.07692%)
+}
+
+.dot-87.p1, .peg[data-pt="87"].p1 {
+    transform: translate(728.21978%, 675.27473%)
+}
+
+.dot-87.p2, .peg[data-pt="87"].p2 {
+    transform: translate(728.21978%, 873.07692%)
+}
+
+.dot-88.p1, .peg[data-pt="88"].p1 {
+    transform: translate(853.21978%, 675.27473%)
+}
+
+.dot-88.p2, .peg[data-pt="88"].p2 {
+    transform: translate(853.21978%, 873.07692%)
+}
+
+.dot-89.p1, .peg[data-pt="89"].p1 {
+    transform: translate(978.21978%, 675.27473%)
+}
+
+.dot-89.p2, .peg[data-pt="89"].p2 {
+    transform: translate(978.21978%, 873.07692%)
+}
+
+.dot-90.p1, .peg[data-pt="90"].p1 {
+    transform: translate(1103.21978%, 675.27473%)
+}
+
+.dot-90.p2, .peg[data-pt="90"].p2 {
+    transform: translate(1103.21978%, 873.07692%)
+}
+
+.dot-91.p1, .peg[data-pt="91"].p1 {
+    transform: translate(1290.03297%, 675.27473%)
+}
+
+.dot-91.p2, .peg[data-pt="91"].p2 {
+    transform: translate(1290.03297%, 873.07692%)
+}
+
+.dot-92.p1, .peg[data-pt="92"].p1 {
+    transform: translate(1415.03297%, 675.27473%)
+}
+
+.dot-92.p2, .peg[data-pt="92"].p2 {
+    transform: translate(1415.03297%, 873.07692%)
+}
+
+.dot-93.p1, .peg[data-pt="93"].p1 {
+    transform: translate(1540.03297%, 675.27473%)
+}
+
+.dot-93.p2, .peg[data-pt="93"].p2 {
+    transform: translate(1540.03297%, 873.07692%)
+}
+
+.dot-94.p1, .peg[data-pt="94"].p1 {
+    transform: translate(1665.03297%, 675.27473%)
+}
+
+.dot-94.p2, .peg[data-pt="94"].p2 {
+    transform: translate(1665.03297%, 873.07692%)
+}
+
+.dot-95.p1, .peg[data-pt="95"].p1 {
+    transform: translate(1790.03297%, 675.27473%)
+}
+
+.dot-95.p2, .peg[data-pt="95"].p2 {
+    transform: translate(1790.03297%, 873.07692%)
+}
+
+.dot-96.p1, .peg[data-pt="96"].p1 {
+    transform: translate(1976.84615%, 675.27473%)
+}
+
+.dot-96.p2, .peg[data-pt="96"].p2 {
+    transform: translate(1976.84615%, 873.07692%)
+}
+
+.dot-97.p1, .peg[data-pt="97"].p1 {
+    transform: translate(2101.84615%, 675.27473%)
+}
+
+.dot-97.p2, .peg[data-pt="97"].p2 {
+    transform: translate(2101.84615%, 873.07692%)
+}
+
+.dot-98.p1, .peg[data-pt="98"].p1 {
+    transform: translate(2226.84615%, 675.27473%)
+}
+
+.dot-98.p2, .peg[data-pt="98"].p2 {
+    transform: translate(2226.84615%, 873.07692%)
+}
+
+.dot-99.p1, .peg[data-pt="99"].p1 {
+    transform: translate(2351.84615%, 675.27473%)
+}
+
+.dot-99.p2, .peg[data-pt="99"].p2 {
+    transform: translate(2351.84615%, 873.07692%)
+}
+
+.dot-100.p1, .peg[data-pt="100"].p1 {
+    transform: translate(2476.84615%, 675.27473%)
+}
+
+.dot-100.p2, .peg[data-pt="100"].p2 {
+    transform: translate(2476.84615%, 873.07692%)
+}
+
+.dot-101.p1, .peg[data-pt="101"].p1 {
+    transform: translate(2663.65934%, 675.27473%)
+}
+
+.dot-101.p2, .peg[data-pt="101"].p2 {
+    transform: translate(2663.65934%, 873.07692%)
+}
+
+.dot-102.p1, .peg[data-pt="102"].p1 {
+    transform: translate(2788.65934%, 675.27473%)
+}
+
+.dot-102.p2, .peg[data-pt="102"].p2 {
+    transform: translate(2788.65934%, 873.07692%)
+}
+
+.dot-103.p1, .peg[data-pt="103"].p1 {
+    transform: translate(2913.65934%, 675.27473%)
+}
+
+.dot-103.p2, .peg[data-pt="103"].p2 {
+    transform: translate(2913.65934%, 873.07692%)
+}
+
+.dot-104.p1, .peg[data-pt="104"].p1 {
+    transform: translate(3038.65934%, 675.27473%)
+}
+
+.dot-104.p2, .peg[data-pt="104"].p2 {
+    transform: translate(3038.65934%, 873.07692%)
+}
+
+.dot-105.p1, .peg[data-pt="105"].p1 {
+    transform: translate(3163.65934%, 675.27473%)
+}
+
+.dot-105.p2, .peg[data-pt="105"].p2 {
+    transform: translate(3163.65934%, 873.07692%)
+}
+
+.dot-106.p1, .peg[data-pt="106"].p1 {
+    transform: translate(3350.47253%, 675.27473%)
+}
+
+.dot-106.p2, .peg[data-pt="106"].p2 {
+    transform: translate(3350.47253%, 873.07692%)
+}
+
+.dot-107.p1, .peg[data-pt="107"].p1 {
+    transform: translate(3475.47253%, 675.27473%)
+}
+
+.dot-107.p2, .peg[data-pt="107"].p2 {
+    transform: translate(3475.47253%, 873.07692%)
+}
+
+.dot-108.p1, .peg[data-pt="108"].p1 {
+    transform: translate(3600.47253%, 675.27473%)
+}
+
+.dot-108.p2, .peg[data-pt="108"].p2 {
+    transform: translate(3600.47253%, 873.07692%)
+}
+
+.dot-109.p1, .peg[data-pt="109"].p1 {
+    transform: translate(3725.47253%, 675.27473%)
+}
+
+.dot-109.p2, .peg[data-pt="109"].p2 {
+    transform: translate(3725.47253%, 873.07692%)
+}
+
+.dot-110.p1, .peg[data-pt="110"].p1 {
+    transform: translate(3850.47253%, 675.27473%)
+}
+
+.dot-110.p2, .peg[data-pt="110"].p2 {
+    transform: translate(3850.47253%, 873.07692%)
+}
+
+.dot-111.p1, .peg[data-pt="111"].p1 {
+    transform: translate(4037.28571%, 675.27473%)
+}
+
+.dot-111.p2, .peg[data-pt="111"].p2 {
+    transform: translate(4037.28571%, 873.07692%)
+}
+
+.dot-112.p1, .peg[data-pt="112"].p1 {
+    transform: translate(4162.28571%, 675.27473%)
+}
+
+.dot-112.p2, .peg[data-pt="112"].p2 {
+    transform: translate(4162.28571%, 873.07692%)
+}
+
+.dot-113.p1, .peg[data-pt="113"].p1 {
+    transform: translate(4287.28571%, 675.27473%)
+}
+
+.dot-113.p2, .peg[data-pt="113"].p2 {
+    transform: translate(4287.28571%, 873.07692%)
+}
+
+.dot-114.p1, .peg[data-pt="114"].p1 {
+    transform: translate(4412.28571%, 675.27473%)
+}
+
+.dot-114.p2, .peg[data-pt="114"].p2 {
+    transform: translate(4412.28571%, 873.07692%)
+}
+
+.dot-115.p1, .peg[data-pt="115"].p1 {
+    transform: translate(4537.28571%, 675.27473%)
+}
+
+.dot-115.p2, .peg[data-pt="115"].p2 {
+    transform: translate(4537.28571%, 873.07692%)
+}
+
+.dot-116.p1, .peg[data-pt="116"].p1 {
+    transform: translate(4724.0989%, 675.27473%)
+}
+
+.dot-116.p2, .peg[data-pt="116"].p2 {
+    transform: translate(4724.0989%, 873.07692%)
+}
+
+.dot-117.p1, .peg[data-pt="117"].p1 {
+    transform: translate(4849.0989%, 675.27473%)
+}
+
+.dot-117.p2, .peg[data-pt="117"].p2 {
+    transform: translate(4849.0989%, 873.07692%)
+}
+
+.dot-118.p1, .peg[data-pt="118"].p1 {
+    transform: translate(4974.0989%, 675.27473%)
+}
+
+.dot-118.p2, .peg[data-pt="118"].p2 {
+    transform: translate(4974.0989%, 873.07692%)
+}
+
+.dot-119.p1, .peg[data-pt="119"].p1 {
+    transform: translate(5099.0989%, 675.27473%)
+}
+
+.dot-119.p2, .peg[data-pt="119"].p2 {
+    transform: translate(5099.0989%, 873.07692%)
+}
+
+.dot-120.p1, .peg[data-pt="120"].p1 {
+    transform: translate(5224.0989%, 675.27473%)
+}
+
+.dot-120.p2, .peg[data-pt="120"].p2 {
+    transform: translate(5224.0989%, 873.07692%)
+}
+
+.dot-121, .peg[data-pt="121"] {
+    transform: translate(5410.91209%, 774.17582%)
+}
+
+.dot-36.p1, .peg[data-pt="36"].p1 {
+    transform: translate(5410.91209%, 125.82418%)
+}
+
+.dot-36.p2, .peg[data-pt="36"].p2 {
+    transform: translate(5410.91209%, 323.62637%)
+}
+
+.dot-37.p1, .peg[data-pt="37"].p1 {
+    transform: translate(5621.99474%, 161.1473%)
+}
+
+.dot-37.p2, .peg[data-pt="37"].p2 {
+    transform: translate(5557.59664%, 348.17295%)
+}
+
+.dot-38.p1, .peg[data-pt="38"].p1 {
+    transform: translate(5810.07722%, 263.26775%)
+}
+
+.dot-38.p2, .peg[data-pt="38"].p2 {
+    transform: translate(5688.29803%, 419.13801%)
+}
+
+.dot-39.p1, .peg[data-pt="39"].p1 {
+    transform: translate(5954.66553%, 421.05821%)
+}
+
+.dot-39.p2, .peg[data-pt="39"].p2 {
+    transform: translate(5788.77465%, 528.78901%)
+}
+
+.dot-40.p1, .peg[data-pt="40"].p1 {
+    transform: translate(6040.00492%, 617.32536%)
+}
+
+.dot-40.p2, .peg[data-pt="40"].p2 {
+    transform: translate(5848.07829%, 665.17805%)
+}
+
+.dot-41.p1, .peg[data-pt="41"].p1 {
+    transform: translate(6040.00492%, 931.02628%)
+}
+
+.dot-41.p2, .peg[data-pt="41"].p2 {
+    transform: translate(5848.07829%, 883.1736%)
+}
+
+.dot-42.p1, .peg[data-pt="42"].p1 {
+    transform: translate(5954.66553%, 1127.29344%)
+}
+
+.dot-42.p2, .peg[data-pt="42"].p2 {
+    transform: translate(5788.77465%, 1019.56264%)
+}
+
+.dot-43.p1, .peg[data-pt="43"].p1 {
+    transform: translate(5810.07722%, 1285.0839%)
+}
+
+.dot-43.p2, .peg[data-pt="43"].p2 {
+    transform: translate(5688.29803%, 1129.21364%)
+}
+
+.dot-44.p1, .peg[data-pt="44"].p1 {
+    transform: translate(5621.99474%, 1387.20435%)
+}
+
+.dot-44.p2, .peg[data-pt="44"].p2 {
+    transform: translate(5557.59664%, 1200.1787%)
+}
+
+.dot-45.p1, .peg[data-pt="45"].p1 {
+    transform: translate(5410.91209%, 1422.52747%)
+}
+
+.dot-45.p2, .peg[data-pt="45"].p2 {
+    transform: translate(5410.91209%, 1224.72527%)
+}
+
+.dot-81.p1, .peg[data-pt="81"].p1 {
+    transform: translate(416.40659%, 1422.52747%)
+}
+
+.dot-81.p2, .peg[data-pt="81"].p2 {
+    transform: translate(416.40659%, 1224.72527%)
+}
+
+.dot-82.p1, .peg[data-pt="82"].p1 {
+    transform: translate(152.21285%, 1313.09484%)
+}
+
+.dot-82.p2, .peg[data-pt="82"].p2 {
+    transform: translate(292.08013%, 1173.22757%)
+}
+
+.dot-83.p1, .peg[data-pt="83"].p1 {
+    transform: translate(42.78022%, 1048.9011%)
+}
+
+.dot-83.p2, .peg[data-pt="83"].p2 {
+    transform: translate(240.58242%, 1048.9011%)
+}
+
+.dot-84.p1, .peg[data-pt="84"].p1 {
+    transform: translate(152.21285%, 784.70736%)
+}
+
+.dot-84.p2, .peg[data-pt="84"].p2 {
+    transform: translate(292.08013%, 924.57463%)
+}
+
+.dot-85.p1, .peg[data-pt="85"].p1 {
+    transform: translate(416.40659%, 675.27473%)
+}
+
+.dot-85.p2, .peg[data-pt="85"].p2 {
+    transform: translate(416.40659%, 873.07692%)
+}
+
+#board-start-line {
+    position: absolute;
+    top: 16.66667%;
+    left: 8.91111%;
+    height: 24%;
+    width: 2px;
+    background: #cfcfcf;
+    transform: translate(0, -50%)
+}
+
+#skunk-s-wrapper {
+    position: absolute;
+    top: 50%;
+    transform: translate(-177%, -50%);
+    left: 22.22222%;
+    width: 1.61778%;
+    line-height: 0
+}
+
+#skunk-s-wrapper .s {
+    fill: #ABABAB;
+    stroke: #ABABAB
+}
+
+#cribbage-board.classic {
+    background-image: url("/assets/img/board-bkg-classic.png");
+    box-shadow: 4px 4px 5px 3px rgba(0, 0, 0, 0.25)
+}
+
+#cribbage-board.classic #board-start-line {
+    background: #000
+}
+
+#cribbage-board.classic #skunk-s-wrapper .s {
+    fill: #000;
+    stroke: #000
+}
+
+#cribbage-board.classic .peg.p1 .handle {
+    background: #f44336 radial-gradient(circle at 40% 40%, #ff3a2b, #000000)
+}
+
+#cribbage-board.classic .peg.p2 .handle {
+    background: #1565c0 radial-gradient(circle at 40% 40%, #0064d5, #000000)
+}
+
+#cribbage-board.classic .peg:before {
+    content: '';
+    position: absolute;
+    right: -200%;
+    bottom: -200%;
+    width: 250%;
+    height: 250%;
+    background: url("/assets/img/peg_shadow.png");
+    background-size: contain;
+    z-index: -1
+}
+
+#cribbage-board.classic .peg.dragging:before {
+    right: -275%;
+    bottom: -275%
+}
+
+#cribbage-board.bar #board-wrapper {
+    display: none
+}
+
+#bar-board {
+    display: none;
+    background: #f8fafa
+}
+
+#cribbage-board.bar #bar-board {
+    display: block
+}
+
+#bar-board .player-bar-wrapper {
+    height: 50%;
+    position: relative;
+    overflow: hidden;
+    z-index: 1
+}
+
+#bar-board .player-bar-wrapper .player-bar {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 10%;
+    height: 80%;
+    transform: translateX(-99.18033%);
+    transition: transform 0.35s
+}
+
+#bar-board .player-bar-wrapper .player-bar#p1-bar {
+    background: #ba160a
+}
+
+#bar-board .player-bar-wrapper .player-bar#p2-bar {
+    background: #104d92
+}
+
+#bar-board .vert-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    box-sizing: content-box;
+    width: 0px;
+    border-left: 1px solid #595959;
+    z-index: 2
+}
+
+#bar-board #start-line {
+    left: .81967%;
+    transform: translate(-1px, 0);
+    border-right: 1px solid #595959
+}
+
+#bar-board #doubleskunk-line {
+    left: 50%;
+    transform: translate(-2px, 0);
+    width: 1px;
+    border-right: 1px solid #595959
+}
+
+#bar-board #skunk-line {
+    left: 74.59016%
+}
+
+#bar-board #finish-line {
+    left: 99.18033%;
+    transform: translate(-1px, 0);
+    border-right: 1px solid #595959
+}
+
+.player-area {
+    display: inline-block;
+    width: 50%;
+    margin-bottom: 40px
+}
+
+.player-area#p1-area {
+    text-align: right;
+    padding-right: 12px;
+    border-right: 1px solid #cfcfcf
+}
+
+.player-area#p2-area {
+    padding-left: 12px
+}
+
+.scoreboard {
+    width: 100%;
+    margin-bottom: 12px
+}
+
+.scoreboard .name-input-form {
+    overflow: visible
+}
+
+.scoreboard .name-input-form input[type="submit"] {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    z-index: -1
+}
+
+.skunked .scoreboard .name-input-form:after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 10%;
+    height: 30px;
+    width: 80%;
+    background: url("/assets/img/stinkline.svg") repeat;
+    background-size: 15px 30px;
+    animation: fadeIn 2s 1, backgroundScroll 3s linear infinite;
+    box-shadow: inset 0px 0px 2px 2px #fff;
+    z-index: 2
+}
+
+.scoreboard .name-spacer {
+    display: inline-block;
+    opacity: 0;
+    visibility: hidden;
+    border: 2px solid transparent;
+    padding: 0 16px;
+    line-height: 40px;
+    white-space: nowrap;
+    z-index: -1
+}
+
+.scoreboard .name-spacer:empty:before {
+    content: "\200b"
+}
+
+.scoreboard .name-input, .scoreboard .name-spacer {
+    font-size: 1.25em;
+    font-weight: 600;
+    line-height: 40px
+}
+
+.scoreboard .name-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    z-index: 1
+}
+
+.scoreboard .name-input:not(:focus) {
+    border-color: transparent !important
+}
+
+.scoreboard .name-input:focus {
+    border-color: #a6a6a6
+}
+
+#p1-area .scoreboard .name-input {
+    color: #f44336
+}
+
+#p2-area .scoreboard .name-input {
+    color: #1565c0
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes backgroundScroll {
+    from {
+        background-position: 0 0
+    }
+    to {
+        background-position: 0 -30px
+    }
+}
+
+.scoreboard .score {
+    display: inline-block;
+    font-size: 28px;
+    font-weight: 600;
+    width: 60px;
+    text-align: center;
+    padding: 0;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    margin-bottom: 5px;
+    transition: border 0.25s;
+    position: relative
+}
+
+#p1-area .scoreboard .score.winner {
+    border-color: #f44336
+}
+
+#p2-area .scoreboard .score.winner {
+    border-color: #1565c0
+}
+
+.skunked .scoreboard .score:after {
+    content: '';
+    background: url("/assets/img/skunk.svg") repeat;
+    background-size: 20px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%)
+}
+
+.doubleskunked .scoreboard .score:after {
+    width: 40px
+}
+
+.add-score {
+    padding-left: 0;
+    padding-right: 0;
+    width: 60px
+}
+
+#p1-area .add-score {
+    margin: 0 0 8px 8px
+}
+
+#p2-area .add-score {
+    margin: 0 8px 8px 0
+}
+
+.bottom-col {
+    display: inline-block;
+    vertical-align: top;
+    width: 26%;
+    max-width: 300px
+}
+
+.bottom-col.center {
+    width: 48%;
+    max-width: 500px
+}
+
+.bottom-col.right fieldset {
+    margin-top: 0
+}
+
+.bottom-col.right fieldset .radiogroup label {
+    width: 31.4%;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+    margin-right: 2.3%
+}
+
+.bottom-col.right fieldset .radiogroup label:last-child {
+    margin-right: 0
+}
+
+#history .button-wrapper {
+    margin: 0
+}
+
+#history .button-wrapper button {
+    width: 46px;
+    position: relative;
+    bottom: 8px;
+    margin-bottom: -10px;
+    z-index: 1
+}
+
+#history .button-wrapper button #undo-icon.spin {
+    -webkit-animation: 0.25s ease-out spinLeft;
+    animation: 0.25s ease-out spinLeft
+}
+
+#history .button-wrapper button #redo-icon.spin {
+    -webkit-animation: 0.25s ease-out spinRight;
+    animation: 0.25s ease-out spinRight
+}
+
+@-webkit-keyframes spinLeft {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
+    100% {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg)
+    }
+}
+
+@keyframes spinLeft {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
+    100% {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg)
+    }
+}
+
+@-webkit-keyframes spinRight {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes spinRight {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+
+#history h2, #save-form h2 {
+    margin: 0 0 8px;
+    font-size: 1em;
+    color: #595959;
+    font-weight: 600;
+    vertical-align: middle
+}
+
+#history-list {
+    padding: 6px;
+    border: 2px solid #cfcfcf;
+    border-radius: 8px;
+    width: 100%;
+    min-height: 56px;
+    max-height: 256px;
+    overflow-y: auto;
+    position: relative
+}
+
+#history-list p {
+    margin: 8px 0
+}
+
+#history-list .history-entry {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+#history-list .history-entry .hist-score {
+    font-weight: 600
+}
+
+#history-list .history-entry.p1 {
+    color: #f44336
+}
+
+#history-list .history-entry.p2 {
+    color: #1565c0
+}
+
+#history-list .history-entry.undone {
+    opacity: 0.4
+}
+
+#save-form {
+    text-align: center;
+    padding: 0 24px
+}
+
+#save-form #saved-info, #save-form.saved #do-save {
+    display: none
+}
+
+#save-form.saved #saved-info {
+    display: block
+}
+
+#save-form #save-status .new-save-msg, #save-form #save-status .saving-msg, #save-form #save-status.saving .saved-msg {
+    display: none
+}
+
+#save-form #save-status.saving .saving-msg, #save-form #save-status.new-save .new-save-msg {
+    display: inline
+}
+
+@media screen and (max-width: 876px) {
+    .player-area {
+        margin-bottom: 0
+    }
+
+    #content .bottom-col {
+        display: block;
+        width: 100%;
+        margin: 40px auto;
+        padding: 0
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .scoreboard .name-input, .scoreboard .name-spacer {
+        font-size: 1em;
+        padding-left: 12px;
+        padding-right: 12px
+    }
+
+    .scoreboard .name-spacer {
+        max-width: 166px
+    }
+
+    .scoreboard .score {
+        font-size: 24px;
+        width: 48px
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .player-area#p1-area {
+        padding-right: 8px
+    }
+
+    .player-area#p2-area {
+        padding-left: 8px
+    }
+
+    .scoreboard .name-input, .scoreboard .name-spacer {
+        padding-left: 4px;
+        padding-right: 4px
+    }
+
+    .scoreboard .name-spacer {
+        max-width: 106px
+    }
+
+    .scoreboard .score {
+        font-size: 20px;
+        width: 40px
+    }
+}
