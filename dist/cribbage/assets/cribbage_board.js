@@ -5,7 +5,9 @@ var CribPlayer = function (a) {
     this.playerName = "";
     this.frontPeg = {};
     this.backPeg = {}
-}, p1 = new CribPlayer("p1"), p2 = new CribPlayer("p2"), players = {p1: p1, p2: p2};
+};
+var p1,p2, players;
+
 CribPlayer.prototype.initialize = function () {
     for (var a = this.playerID, b = -1; 121 >= b; ++b) this[b] = $("." + a + '-dot[data-pt="' + b + '"]');
     this.playerName = $("#" + a + "-name").val();
@@ -72,8 +74,21 @@ if('clear' === initialSkin) {
 }
 
 updateSkin();
-p1.initialize();
-p2.initialize();
+const initializePlayers = () => {
+    debugger;
+    p1 = new CribPlayer("p1"); p2 = new CribPlayer("p2");
+    players = {p1: p1, p2: p2};
+    p1.initialize()
+    p2.initialize();
+}
+
+// document.querySelector('#new-game').addEventListener('click', () => {
+//     initializePlayers();
+//     historyList = [];
+// })
+initializePlayers();
+// p1.initialize();
+// p2.initialize();
 
 $(".name-input").on("input", function () {
     var a = $(this), b = a.data("playerid"), a = escapeHtml(a.val()), a = a.replace(/[ ]/g, "&#8200;");
@@ -111,14 +126,6 @@ $("#history-undo").click(function () {
 });
 $("#history-redo").click(function () {
     redoAddScore()
-});
-$(document).keydown(function (a) {
-    $("input").is(":focus") || (a.ctrlKey && 90 == a.keyCode ? undoAddScore() : a.ctrlKey && 89 == a.keyCode && redoAddScore())
-});
-
-
-$('input[name="next-dealer"]').change(function () {
-
 });
 
 function checkWin() {
