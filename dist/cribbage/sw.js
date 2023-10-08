@@ -6,11 +6,10 @@ const addResourcesToCache = async (resources) => {
 self.addEventListener("install", (event) => {
     event.waitUntil(
         addResourcesToCache([
-            "/",
-            "/index.html",
+            "/cribbage/",
+            "/cribbage/index.html",
             "/cribbage/assets/cribbage_board.min.css",
             "/cribbage/assets/cribbage_board.min.js",
-            "/cribbage/assets/css.nope",
             "/cribbage/assets/font-awesome.min.css",
             "/cribbage/assets/jquery-ui.css",
             "/cribbage/assets/jquery-ui.min.js",
@@ -23,7 +22,10 @@ self.addEventListener("install", (event) => {
             "/cribbage/assets/img/peg_shadow.png",
             "/cribbage/assets/img/skunk.svg",
             "/cribbage/assets/img/stinkline.svg",
+            "/cribbage/assets/img/cribbageicon192.png",
+            "/cribbage/assets/img/cribbageicon512.png",
 
         ]),
     );
 });
+

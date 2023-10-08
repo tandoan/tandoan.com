@@ -1,0 +1,29 @@
+{
+  "short_name": "Cribbage Board",
+  "name": "Cribbage Board",
+  "id": "/cribbage/?source=pwa",
+  "icons": [
+    {
+      "src": "/cribbage/assets/img/cribbageicon512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/cribbage/assets/img/cribbageicon192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/cribbage/",
+  "background_color": "#ffffff",
+  "display": "minimal-ui",
+  "scope": "/cribbage/",
+  "theme_color": "#ffffff",
+  "shortcuts": [
+  ],
+  "description": "Cribbage Board",
+  "screenshots": [
+  ]
+}
