@@ -1,41 +1,3 @@
-var $jscomp = {
-    scope: {}, findInternal: function (a, b, c) {
-        a instanceof String && (a = String(a));
-        for (var d = a.length, e = 0; e < d; e++) {
-            var f = a[e];
-            if (b.call(c, f, e, a)) return {i: e, v: f}
-        }
-        return {i: -1, v: void 0}
-    }
-};
-$jscomp.defineProperty = "function" == typeof Object.defineProperties ? Object.defineProperty : function (a, b, c) {
-    if (c.get || c.set) throw new TypeError("ES3 does not support getters and setters.");
-    a != Array.prototype && a != Object.prototype && (a[b] = c.value)
-};
-$jscomp.getGlobal = function (a) {
-    return "undefined" != typeof window && window === a ? a : "undefined" != typeof global && null != global ? global : a
-};
-$jscomp.global = $jscomp.getGlobal(this);
-$jscomp.polyfill = function (a, b, c, d) {
-    if (b) {
-        c = $jscomp.global;
-        a = a.split(".");
-        for (d = 0; d < a.length - 1; d++) {
-            var e = a[d];
-            e in c || (c[e] = {});
-            c = c[e]
-        }
-        a = a[a.length - 1];
-        d = c[a];
-        b = b(d);
-        b != d && null != b && $jscomp.defineProperty(c, a, {configurable: !0, writable: !0, value: b})
-    }
-};
-$jscomp.polyfill("Array.prototype.find", function (a) {
-    return a ? a : function (a, c) {
-        return $jscomp.findInternal(this, a, c).v
-    }
-}, "es6-impl", "es3");
 var CribPlayer = function (a) {
     this.playerID = a;
     this.backPegScore = -1;
@@ -49,7 +11,6 @@ CribPlayer.prototype.initialize = function () {
     this.playerName = $("#" + a + "-name").val();
     this.frontPeg = $("#" + a + "-peg-2");
     this.backPeg = $("#" + a + "-peg-1");
-    initDraggable(this.backPeg);
     return this
 };
 CribPlayer.prototype.otherPlayer = function () {
@@ -61,8 +22,6 @@ CribPlayer.prototype.switchFrontPeg = function () {
     var a = this.frontPeg;
     this.frontPeg = this.backPeg;
     this.backPeg = a;
-    $(this.frontPeg).draggable().draggable("destroy").removeClass("draggable");
-    initDraggable(this.backPeg)
 };
 CribPlayer.prototype.addScore = function (a) {
     var b = this.score, c = this.otherPlayer().score;
@@ -84,10 +43,6 @@ CribPlayer.prototype.addScore = function (a) {
         this.switchFrontPeg();
         this.backPegScore = b;
         addToHistoryList(c);
-        triggerSave();
-        a = getBarTranslateX(f);
-        $("#" +
-            d + "-bar").css("transform", "translateX(" + a + ")")
     }
     return this
 };
@@ -98,27 +53,28 @@ CribPlayer.prototype.setTo = function (a, b) {
     this.switchFrontPeg();
     $("#" + c + "-area .score").text(b);
     121 == b && this[b].addClass("game-over").addClass(c + "-wins");
-    var d = getBarTranslateX(b);
-    $("#" + c + "-bar").css("transform", "translateX(" + d + ")");
     this.backPegScore = a;
     this.score = b;
     checkWin();
     return this
 };
 
-function getBarTranslateX(a) {
-    return "-" + 100 * (1 - (a + 1) / 122) + "%"
+
+var currentSkin, historyList = [], currentHistID, jsBlur = !1;
+$(".undo-redo-btn").prop("disabled", !0);
+
+// initialize skin by setting the radiobutton correctly
+const initialSkin = localStorage.getItem('cribBoardSkin') ?? 'clear';
+if('clear' === initialSkin) {
+    document.querySelector('#clear-skin').setAttribute('checked','true')
+} else {
+    document.querySelector('#classic-skin').setAttribute('checked','true')
 }
 
-var currentSkin, historyList = [], currentHistID, jsBlur = !1, isSavedGame = !1, saveTimeout, gameCode = "";
-$(".undo-redo-btn").prop("disabled", !0);
 updateSkin();
 p1.initialize();
 p2.initialize();
-toggleInstructions(!0);
-$("#show-instructions").change(function () {
-    toggleInstructions(!1)
-});
+
 $(".name-input").on("input", function () {
     var a = $(this), b = a.data("playerid"), a = escapeHtml(a.val()), a = a.replace(/[ ]/g, "&#8200;");
     $("#" + b + "-name-spacer").html(a)
@@ -133,7 +89,6 @@ $(".name-input-form").submit(function (a) {
     var b = a.data("playerid"), c = a.val();
     0 == c.trim().length && (c = "Player " + ("p1" === b ? "One" : "Two"));
     players[b].playerName = c;
-    setCookie(b + "Name", c, 3650);
     jsBlur = !0;
     a.val(c).blur();
     jsBlur = !1;
@@ -141,7 +96,7 @@ $(".name-input-form").submit(function (a) {
     $("#" + b + "-name-spacer").html(c);
     $(".history-entry." + b + " .player-name").html(c);
     $('label[for="' + b + '-deal"]').html(c);
-    triggerSave()
+
 });
 $(".add-score").click(function () {
     var a = $(this), b = myParseInt(a.data("points"));
@@ -149,8 +104,7 @@ $(".add-score").click(function () {
 });
 $('input[name="skin"]').change(function () {
     updateSkin();
-    setCookie("cribBoardSkin", currentSkin, 3650);
-    triggerSave()
+    localStorage.setItem('cribBoardSkin', currentSkin);
 });
 $("#history-undo").click(function () {
     undoAddScore()
@@ -161,52 +115,11 @@ $("#history-redo").click(function () {
 $(document).keydown(function (a) {
     $("input").is(":focus") || (a.ctrlKey && 90 == a.keyCode ? undoAddScore() : a.ctrlKey && 89 == a.keyCode && redoAddScore())
 });
-$("#save-form").submit(function (a) {
-    a.preventDefault();
-    $("#save-game-btn").prop("disabled", !0).addClass("loading");
-    isSavedGame || newSaveGame()
-});
-$("#save-url").on("focus", function () {
-    var a = $(this).one("mouseup.mouseupSelect", function () {
-        a.select();
-        return !1
-    }).one("mousedown", function () {
-        a.off("mouseup.mouseupSelect")
-    }).select()
-});
+
+
 $('input[name="next-dealer"]').change(function () {
-    triggerSave()
+
 });
-
-function initDraggable(a) {
-    $(a).addClass("draggable").draggable({
-        containment: "parent", handle: ".handle", start: function (a, c) {
-            var b = $(this);
-            b.addClass("dragging");
-            var b = b.data("playerid"), e = players[b];
-            $(".dot." + b + " .dot-droppable").filter(function () {
-                return parseInt($(this).data("pt")) > e.score
-            }).droppable({
-                drop: function (a, b) {
-                    var c = parseInt($(this).data("pt"));
-                    e.addScore(c - e.score)
-                }
-            })
-        }, stop: function (a, c) {
-            var b = $(this);
-            b.removeClass("dragging").addClass("dragged").css({top: 0, left: 0});
-            var e = b.data("playerid");
-            $(".dot." + e).droppable().droppable("destroy");
-            setTimeout(function () {
-                b.removeClass("dragged")
-            }, 5)
-        }
-    })
-}
-
-function toggleInstructions(a) {
-    $("#show-instructions").prop("checked") ? a ? $("#instructions").show() : $("#instructions").slideDown("fast") : $("#instructions").slideUp("fast")
-}
 
 function checkWin() {
     var a, b, c = !1;
@@ -221,19 +134,19 @@ function myParseInt(a) {
 }
 
 function updateSkin() {
-    var a = $('input[name="skin"]:checked').val();
+    var a = document.querySelector('input[name="skin"]:checked').value
     currentSkin = a;
-    var b = $("#cribbage-board");
-    b.removeClass("classic").removeClass("bar");
+    var b = document.querySelector('#cribbage-board')
+    b.classList.remove('classic');
     if ("classic" === a) {
         var c = 0, a = ["/cribbage/assets/img/classic.jpg", "/cribbage/assets/img/peg_shadow.png"];
         imageCount = a.length;
         imagesArray = [];
         for (var d = 0; d < imageCount; ++d) imagesArray[d] = new Image, imagesArray[d].onload = function () {
             ++c;
-            c >= imageCount && b.addClass("classic")
+            c >= imageCount && b.classList.add("classic")
         }, imagesArray[d].src = a[d]
-    } else "bar" === a && b.addClass("bar")
+    }
 }
 
 function addToHistoryList(a) {
@@ -264,7 +177,7 @@ function undoAddScore() {
     $icon.remove();
     $newIcon = $icon.clone().addClass("spin").appendTo(a);
     for (var b = !0, c; b;) c = historyList[currentHistID], c.isUndone ? 0 < currentHistID ? --currentHistID : b = !1 : (players[c.playerID].setTo(c.oldBackPegScore, c.oldScore), $("#hist-" + currentHistID).addClass("undone"), c.isUndone = !0, b = !1);
-    triggerSave();
+
     0 == currentHistID && a.prop("disabled", !0);
     $("#history-redo").prop("disabled", !1);
     scrollHist()
@@ -276,7 +189,7 @@ function redoAddScore() {
     $icon.remove();
     $newIcon = $icon.clone().addClass("spin").appendTo(a);
     historyList[currentHistID].isUndone && (a = historyList[currentHistID], players[a.playerID].setTo(a.oldScore, a.newScore), $("#hist-" + currentHistID).removeClass("undone"), historyList[currentHistID].isUndone = !1, currentHistID + 1 < historyList.length ? ++currentHistID : $("#history-redo").prop("disabled", !0));
-    triggerSave();
+
     $("#history-undo").prop("disabled", !1);
     scrollHist()
 }
@@ -289,73 +202,6 @@ function scrollHist() {
     }
 }
 
-function genFormData() {
-    var a = new FormData;
-    a.append("p1Name", p1.playerName);
-    a.append("p2Name", p2.playerName);
-    a.append("p1BackPegScore", p1.backPegScore);
-    a.append("p2BackPegScore", p2.backPegScore);
-    a.append("p1Score", p1.score);
-    a.append("p2Score", p2.score);
-    a.append("historyList", JSON.stringify(historyList));
-    a.append("boardSkin", currentSkin);
-    var b = "", c = $('input[name="next-dealer"]:checked');
-    c.length && (b = c.val());
-    a.append("nextDealer", b);
-    return a
-}
-
-function newSaveGame() {
-    var a = genFormData();
-    a.append("isNewGame", "true");
-    doAjax(a, newSaveGameSuccess)
-}
-
-function newSaveGameSuccess(a) {
-    isSavedGame = !0;
-    gameCode = a.code;
-    $("#save-game-btn").removeClass("loading");
-    a = "board.php?c=" + a.code;
-    $("#save-url").val("cliambrown.com/cribbage/" + a);
-    $("#save-status").addClass("new-save");
-    $("#save-form").addClass("saved");
-    history.pushState({}, document.title, a)
-}
-
-function triggerSave() {
-    isSavedGame && ($("#save-status").removeClass("new-save").addClass("saving"), window.clearTimeout(saveTimeout), saveTimeout = window.setTimeout(updateSave, 1E3))
-}
-
-function updateSave() {
-    var a = genFormData();
-    a.append("isNewGame", "false");
-    a.append("code", gameCode);
-    doAjax(a, updateSaveSuccess)
-}
-
-function updateSaveSuccess(a) {
-    $("#save-status").removeClass("new-save saving")
-}
-
-function doAjax(a, b) {
-    $.ajax({
-        url: "../scripts/save_crib_board.php",
-        type: "POST",
-        data: a,
-        processData: !1,
-        contentType: !1,
-        dataType: "json",
-        error: function (a, b) {
-            var c = getAjaxError(a, b);
-            $("#save-game-btn").prop("disabled", !1).removeClass("loading");
-            alert("Could not save game: " + c)
-        },
-        success: function (a) {
-            a.hasOwnProperty("status") ? "success" === a.status ? b(a) : ($("#save-game-btn").prop("disabled", !1).removeClass("loading"), alert("Could not save game: " + a.errStr)) : ($("#save-game-btn").prop("disabled", !1).removeClass("loading"),
-                alert("Could not save game: Unknown error."))
-        }
-    })
-}
 
 function escapeHtml(a) {
     var b = {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"};
@@ -364,8 +210,3 @@ function escapeHtml(a) {
     })
 }
 
-function setCookie(a, b, c) {
-    var d = "";
-    c && (d = new Date, d.setTime(d.getTime() + 864E5 * c), d = "; expires=" + d.toUTCString());
-    document.cookie = a + "=" + (b || "") + d + "; path=/"
-};

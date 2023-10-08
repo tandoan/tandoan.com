@@ -10,7 +10,6 @@
     <title>Cribbage Board</title>
 
     <link rel="stylesheet" href="/cribbage/assets/main.min.css">
-    <link rel="stylesheet" href="/cribbage/assets/jquery-ui.css">
     <link rel="stylesheet" href="/cribbage/assets/cribbage_board.min.css">
 </head>
 
@@ -20,7 +19,7 @@
 
     <div id="content">
         <div class="top-right">
-            <a class="button" href="/">New Game</a>&nbsp;<button type="button"
+            <a class="button" href="/cribbage">New Game</a>&nbsp;<button type="button"
                                                                  class="fullscreen-btn"
                                                                  title="Toggle fullscreen">Toggle Full Screen
         </button>
@@ -30,8 +29,6 @@
 
 
         <p>
-            <span class="bold green-text">Move:</span> &nbsp;Drag &amp; drop a back peg, or click the green buttons
-            below.<br>
             <span class="bold green-text">Undo/Redo:</span> &nbsp;Click the Undo/Redo buttons, or use Ctrl / ⌘ + Z /
             Y.<br>
             <span class="bold green-text">Edit Names:</span> &nbsp;Click the names and enter new ones.<br>
@@ -41,29 +38,7 @@
 
             <div class="right-turn-box"></div>
 
-            <div id="bar-board">
-                <div class="player-bar-wrapper">
-                    <div id="p1-bar" class="player-bar"></div>
-                </div>
-                <div class="player-bar-wrapper">
-                    <div id="p2-bar" class="player-bar"></div>
-                </div>
-                <div class="vert-line" id="start-line"></div>
-                <div class="vert-line" id="doubleskunk-line"></div>
-                <div class="vert-line" id="skunk-line"></div>
-                <div class="vert-line" id="finish-line"></div>
-            </div>
-
             <div id="board-wrapper">
-
-                <!-- <div id="board-start-line"></div> -->
-
-                <!-- <div id="skunk-s-wrapper">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 394">
-                        <path class="s" d="M147.09 204.27c-20.87-15.02-41.62-29.91-62.23-44.68-22.15-17.05-33.22-34.61-33.22-52.68 0-14.01 5.22-25.47 15.66-34.38 8.9-7.12 18.83-10.69 29.78-10.69 18.58 0 34.24 8.15 46.97 24.44 10.43 13.49 17.69 30.67 21.76 51.55h9.16l-8.39-87.06h-8.41c-.51 3.05-1.15 6.11-1.9 9.17-1.03 3.56-3.95 5.34-8.79 5.34-1.78 0-8.78-2.41-21-7.25-12.21-4.84-22.65-7.26-31.31-7.26-18.07 0-33.22 5.98-45.44 17.95C36.24 81.7 29.5 99.39 29.5 121.8c0 18.32 6.23 33.72 18.7 46.2 4.84 5.34 19.47 16.16 43.91 32.45 26.99 18.33 45.06 33.34 54.22 45.05 8.14 10.44 12.22 22.28 12.22 35.52 0 12.46-5.47 23.92-16.41 34.36-10.95 10.69-24.19 16.04-39.72 16.04-35.38 0-60.33-25.07-74.84-75.22h-9.16l11.46 86.68h8.4c1.01-9.42 5.85-14.13 14.5-14.13 2.29 0 8.91 2.29 19.86 6.88 11.2 5.08 22.27 7.62 33.22 7.62 24.94 0 44.68-8.15 59.19-24.44 12.22-14.51 18.33-31.43 18.33-50.78-1.28-23.16-13.37-44.42-36.29-63.76z"/>
-                    </svg>
-                </div> -->
-
 
                 <div class="dot dot--1 p1">
                     <div class="dot-droppable droppable--1" data-pt="-1"></div>
@@ -802,14 +777,14 @@
                     <div class="dot-droppable droppable-121" data-pt="121"></div>
                 </div>
 
-                <div id="p1-peg-1" class="peg p1 draggable ui-draggable" data-pt="-1" data-playerid="p1">
-                    <div class="handle ui-draggable-handle"></div>
+                <div id="p1-peg-1" class="peg p1 " data-pt="-1" data-playerid="p1">
+                    <div class="handle"></div>
                 </div>
                 <div id="p1-peg-2" class="peg p1" data-pt="0" data-playerid="p1">
                     <div class="handle"></div>
                 </div>
-                <div id="p2-peg-1" class="peg p2 draggable ui-draggable" data-pt="-1" data-playerid="p2">
-                    <div class="handle ui-draggable-handle"></div>
+                <div id="p2-peg-1" class="peg p2 " data-pt="-1" data-playerid="p2">
+                    <div class="handle"></div>
                 </div>
                 <div id="p2-peg-2" class="peg p2" data-pt="0" data-playerid="p2">
                     <div class="handle"></div>
@@ -928,15 +903,11 @@
                                checked=""><label for="clear-skin">clear</label>
                         <input type="radio" class="board-skin" name="skin" id="classic-skin" value="classic"><label
                             for="classic-skin">classic</label>
-                        <input type="radio" class="board-skin" name="skin" id="bar-skin" value="bar"><label
-                            for="bar-skin">bar</label>
                     </div>
                 </fieldset>
             </div>
 
         </div>
-
-        <br>
 
 
     </div> <!-- #content -->
@@ -944,11 +915,13 @@
 </div> <!-- #container -->
 
 <script src="/cribbage/assets/jquery.min.js"></script>
-<script src="/cribbage/assets/main.js"></script>
-<script src="/cribbage/assets/jquery-ui.min.js"></script>
-<script src="/cribbage/assets/cribbage_board.min.js"></script>
+<!--<script src="/cribbage/assets/jquery-ui.min.js"></script>-->
+<script src="/cribbage/assets/cribbage_board.js"></script>
 
 <script>
+    document.querySelector('.fullscreen-btn').addEventListener('click', () => {
+        document.querySelector('body').classList.toggle('fullscreen');
+    })
     const registerServiceWorker = async () => {
         if ("serviceWorker" in navigator) {
             try {
@@ -968,9 +941,7 @@
         }
     };
 
-    // …
-
-    registerServiceWorker();
+    // registerServiceWorker();
 </script>
 
 </body>
