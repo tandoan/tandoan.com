@@ -18,7 +18,8 @@ self.addEventListener("install", (event) => {
             "/cribbage/assets/img/peg_shadow.png",
             "/cribbage/assets/img/skunk.svg",
             "/cribbage/assets/img/stinkline.svg",
-            "/cribbage/assets/img/app-icon.svg",
+            "/cribbage/assets/img/app-icon.png",
+            "/cribbage/assets/img/app-icon512.png",
         ]),
     );
 });

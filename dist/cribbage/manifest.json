@@ -4,23 +4,23 @@
   "id": "/cribbage/?source=pwa",
   "icons": [
     {
-      "src": "/cribbage/assets/img/app-icon.svg",
-      "type": "image/svg+xml",
+      "src": "/cribbage/assets/img/app-icon512.png",
+      "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"
     },
     {
-      "src": "/cribbage/assets/img/app-icon.svg",
-      "type": "image/svg+xml",
+      "src": "/cribbage/assets/img/app-icon.png",
+      "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     }
   ],
   "start_url": "/cribbage/",
-  "background_color": "#ffffff",
+  "background_color": "#d4ffea",
   "display": "fullscreen",
   "scope": "/cribbage/",
-  "theme_color": "#ffffff",
+  "theme_color": "#dbdcff",
   "shortcuts": [
   ],
   "description": "Cribbage Board",
