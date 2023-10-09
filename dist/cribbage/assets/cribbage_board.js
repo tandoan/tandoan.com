@@ -2,15 +2,7 @@ class Game {
     constructor() {
         this.skin = 'clear';
         this.historyList = [];
-        this.currentHistoryId = undefined;
-    }
-
-    set player1(p) {
-        this.p1 = p;
-    }
-
-    set player2(p) {
-        this.p2 = p;
+        this.currentHistID = undefined;
     }
 
     checkWin() {
@@ -44,13 +36,13 @@ class Game {
     }
 
     redoAddScore() {
-        if (historyList[currentHistID].isUndone) {
-            const a = historyList[currentHistID];
+        if (this.historyList[this.currentHistID].isUndone) {
+            const a = this.historyList[this.currentHistID];
             players[a.playerID].setTo(a.oldScore, a.newScore);
-            document.querySelector(`#hist-${currentHistID}`).classList.remove('undone')
-            historyList[currentHistID].isUndone = false;
-            if (currentHistID + 1 < historyList.length) {
-                ++currentHistID
+            document.querySelector(`#hist-${this.currentHistID}`).classList.remove('undone')
+            this.historyList[this.currentHistID].isUndone = false;
+            if (this.currentHistID + 1 < this.historyList.length) {
+                ++this.currentHistID
             } else {
                 document.querySelector('#history-redo').setAttribute('disabled', 'disabled')
             }
@@ -62,27 +54,27 @@ class Game {
     undoAddScore() {
         const undoElem = document.querySelector('#history-undo');
         for (var b = true, c; b;) {
-            c = historyList[currentHistID];
+            c = this.historyList[this.currentHistID];
             if (c.isUndone) {
-                0 < currentHistID
-                    ? --currentHistID
+                0 < this.currentHistID
+                    ? --this.currentHistID
                     : b = false
             } else {
                 players[c.playerID].setTo(c.oldBackPegScore, c.oldScore);
-                document.querySelector(`#hist-${currentHistID}`).classList.add('undone')
+                document.querySelector(`#hist-${this.currentHistID}`).classList.add('undone')
                 c.isUndone = true;
                 b = false;
             }
         }
 
-        if (0 === currentHistID) {
+        if (0 === this.currentHistID) {
             undoElem.setAttribute('disabled', 'disabled')
         }
         document.querySelector('#history-redo').removeAttribute('disabled');
     }
 
     clearUndone() {
-        for (; 0 < historyList.length && historyList[historyList.length - 1].isUndone;) historyList.splice(-1);
+        for (; 0 < this.historyList.length && this.historyList[this.historyList.length - 1].isUndone;) this.historyList.splice(-1);
         document.querySelectorAll(`.history-entry.undone`).forEach(each => each.remove())
     }
 
@@ -102,8 +94,8 @@ class Game {
         }
     }
     addToHistoryList(a) {
-        historyList.push(a);
-        currentHistID = historyList.length - 1;
+        this.historyList.push(a);
+        this.currentHistID = this.historyList.length - 1;
         document.querySelector('.no-history')?.remove();
         const historyListEl = document.querySelector('#history-list');
         const playerID = a.playerID;
@@ -118,7 +110,7 @@ class Game {
         innerThings.push(tmp);
 
         let outer = document.createElement('p')
-        outer.setAttribute('id', `hist-${currentHistID}`);
+        outer.setAttribute('id', `hist-${this.currentHistID}`);
         outer.classList.add('history-entry')
         outer.classList.add(playerID)
         innerThings.forEach(each => outer.appendChild(each))
@@ -225,8 +217,6 @@ const initializePlayers = () => {
 initializePlayers();
 theGame.p1 = p1;
 theGame.p2 = p2;
-var historyList = theGame.historyList;
-var currentHistID = theGame.currentHistoryId
 
 document.querySelectorAll('.score-buttons').forEach((each) => each.addEventListener('click', (e, t2) => {
     let b = myParseInt(e.target.dataset.points);
