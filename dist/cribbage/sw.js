@@ -1,4 +1,4 @@
-const cacheName = 'cribbageBoard-v1'
+const cacheName = 'cribbageBoard-v2'
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open(cacheName);
     await cache.addAll(resources);
@@ -18,9 +18,7 @@ self.addEventListener("install", (event) => {
             "/cribbage/assets/img/peg_shadow.png",
             "/cribbage/assets/img/skunk.svg",
             "/cribbage/assets/img/stinkline.svg",
-            "/cribbage/assets/img/cribbageicon192.png",
-            "/cribbage/assets/img/cribbageicon512.png",
-
+            "/cribbage/assets/img/app-icon.svg",
         ]),
     );
 });
