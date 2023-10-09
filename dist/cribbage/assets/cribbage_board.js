@@ -49,7 +49,7 @@ var CribPlayer = function (a) {
 var p1, p2, players;
 
 CribPlayer.prototype.initialize = function () {
-    for (var a = this.playerID, b = -1; 121 >= b; ++b) this[b] = $("." + a + '-dot[data-pt="' + b + '"]');
+    for (var a = this.playerID, b = -1; 121 >= b; ++b) this[b]=document.querySelector(`.${a}-dot[data-pt="${b}"]`);
 
     this.playerName = document.querySelector(`#${this.playerID}-name`).value;
     this.frontPeg = document.querySelector(`#${this.playerID}-peg-2`);
