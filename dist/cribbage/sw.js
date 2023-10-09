@@ -1,5 +1,6 @@
+const cacheName = 'cribbageBoard-v1'
 const addResourcesToCache = async (resources) => {
-    const cache = await caches.open("v1");
+    const cache = await caches.open(cacheName);
     await cache.addAll(resources);
 };
 
@@ -8,13 +9,9 @@ self.addEventListener("install", (event) => {
         addResourcesToCache([
             "/cribbage/",
             "/cribbage/index.html",
+            "/cribbage/assets/cribbage_board.js",
             "/cribbage/assets/cribbage_board.min.css",
-            "/cribbage/assets/cribbage_board.min.js",
-            "/cribbage/assets/font-awesome.min.css",
-            "/cribbage/assets/jquery-ui.css",
-            "/cribbage/assets/jquery-ui.min.js",
             "/cribbage/assets/jquery.min.js",
-            "/cribbage/assets/main.js",
             "/cribbage/assets/main.min.css",
             "/cribbage/assets/img/board-bkg-classic.png",
             "/cribbage/assets/img/board-bkg-clear.png",
@@ -29,3 +26,24 @@ self.addEventListener("install", (event) => {
     );
 });
 
+
+// Fetching content using Service Worker
+self.addEventListener('fetch', (e) => {
+    // Cache http and https only, skip unsupported chrome-extension:// and file://...
+    if (!(
+        e.request.url.startsWith('http:') || e.request.url.startsWith('https:')
+    )) {
+        return;
+    }
+
+    e.respondWith((async () => {
+        const r = await caches.match(e.request);
+        console.log(`[Service Worker] Fetching resource: ${e.request.url}`);
+        if (r) return r;
+        const response = await fetch(e.request);
+        const cache = await caches.open(cacheName);
+        console.log(`[Service Worker] Caching new resource: ${e.request.url}`);
+        cache.put(e.request, response.clone());
+        return response;
+    })());
+});

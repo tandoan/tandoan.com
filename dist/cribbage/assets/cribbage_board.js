@@ -75,7 +75,6 @@ if('clear' === initialSkin) {
 
 updateSkin();
 const initializePlayers = () => {
-    debugger;
     p1 = new CribPlayer("p1"); p2 = new CribPlayer("p2");
     players = {p1: p1, p2: p2};
     p1.initialize()
