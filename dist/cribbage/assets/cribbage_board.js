@@ -1,3 +1,43 @@
+class Game {
+    set player1(p) {
+        this.p1 = p;
+    }
+
+    set player2(p) {
+        this.p2 = p;
+    }
+
+    checkWin() {
+        var a, b, c = !1;
+        let winner;
+        let loser;
+        let haveWinner = false;
+
+        if (this.p1.score >= 121) {
+            winner = this.p1;
+            loser = this.p2;
+            haveWinner = true;
+        } else if (this.p2.score >= 121) {
+            winner = this.p2;
+            loser = this.p1;
+            haveWinner = true;
+        }
+        if (haveWinner) {
+            document.querySelector(`#${winner.playerID}-area .score`).classList.add('winner');
+            if (91 > loser.score) {
+                document.querySelector(`#${loser.playerID}-area`).classList.add('skunked');
+            }
+            if (61 > loser.score) {
+                document.querySelector(`#${loser.playerID}-area`).classList.add('doubleskunked');
+            }
+        } else {
+            document.querySelector('.score.winner')?.classList.remove('winner')
+            document.querySelector('.skunked')?.classList.remove('sknunked')
+            document.querySelector('.doubleskunked')?.classList.remove('doubleskunked')
+        }
+    }
+}
+
 var CribPlayer = function (a) {
     this.playerID = a;
     this.backPegScore = -1;
@@ -6,7 +46,7 @@ var CribPlayer = function (a) {
     this.frontPeg = {};
     this.backPeg = {}
 };
-var p1,p2, players;
+var p1, p2, players;
 
 CribPlayer.prototype.initialize = function () {
     for (var a = this.playerID, b = -1; 121 >= b; ++b) this[b] = $("." + a + '-dot[data-pt="' + b + '"]');
@@ -67,15 +107,16 @@ $(".undo-redo-btn").prop("disabled", !0);
 
 // initialize skin by setting the radiobutton correctly
 const initialSkin = localStorage.getItem('cribBoardSkin') ?? 'clear';
-if('clear' === initialSkin) {
-    document.querySelector('#clear-skin').setAttribute('checked','true')
+if ('clear' === initialSkin) {
+    document.querySelector('#clear-skin').setAttribute('checked', 'true')
 } else {
-    document.querySelector('#classic-skin').setAttribute('checked','true')
+    document.querySelector('#classic-skin').setAttribute('checked', 'true')
 }
 
 updateSkin();
 const initializePlayers = () => {
-    p1 = new CribPlayer("p1"); p2 = new CribPlayer("p2");
+    p1 = new CribPlayer("p1");
+    p2 = new CribPlayer("p2");
     players = {p1: p1, p2: p2};
     p1.initialize()
     p2.initialize();
@@ -88,6 +129,9 @@ const initializePlayers = () => {
 initializePlayers();
 // p1.initialize();
 // p2.initialize();
+const theGame = new Game();
+theGame.p1 = p1;
+theGame.p2 = p2;
 
 $(".name-input").on("input", function () {
     var a = $(this), b = a.data("playerid"), a = escapeHtml(a.val()), a = a.replace(/[ ]/g, "&#8200;");
@@ -128,9 +172,7 @@ $("#history-redo").click(function () {
 });
 
 function checkWin() {
-    var a, b, c = !1;
-    121 == p1.score ? (a = p1, b = p2, c = !0) : 121 == p2.score && (a = p2, b = p1, c = !0);
-    c ? ($("#" + a.playerID + "-area .score").addClass("winner"), 91 > b.score && (a = $("#" + b.playerID + "-area"), a.addClass("skunked"), 61 > b.score && a.addClass("doubleskunked"))) : ($(".score.winner").removeClass("winner"), $(".skunked").removeClass("skunked"), $(".doubleskunked").removeClass("doubleskunked"))
+    return theGame.checkWin()
 }
 
 function myParseInt(a) {
