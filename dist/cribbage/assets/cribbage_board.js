@@ -102,7 +102,7 @@ CribPlayer.prototype.setTo = function (a, b) {
 
 
 var currentSkin, historyList = [], currentHistID, jsBlur = !1;
-$(".undo-redo-btn").prop("disabled", !0);
+document.querySelector('.undo-redo-btn').setAttribute('disabled','disabled')
 
 // initialize skin by setting the radiobutton correctly
 const initialSkin = localStorage.getItem('cribBoardSkin') ?? 'clear';
@@ -192,44 +192,76 @@ function updateSkin() {
 function addToHistoryList(a) {
     historyList.push(a);
     currentHistID = historyList.length - 1;
-    $(".no-history").remove();
-    $historyListEl = $("#history-list");
-    $historyListEl.animate({scrollTop: 0}, 250);
-    var b = a.playerID,
-        c = '<span class="hist-score">+' + a.scoreToAdd + '</span> &nbsp;<span class="player-name">' + escapeHtml(players[b].playerName) + "</span>",
-        b = $("<p>", {id: "hist-" + currentHistID}).addClass("history-entry").addClass(b).html(c);
-    a.isUndone && b.addClass("undone");
-    b.prependTo($historyListEl).hide().fadeIn("fast");
-    $("#history-undo").prop("disabled", !1);
-    $("#history-redo").prop("disabled", !0)
+    document.querySelector('.no-history')?.remove();
+    const historyListEl = document.querySelector('#history-list');
+    const playerID = a.playerID;
+    const innerThings = [];
+    let tmp = document.createElement('span');
+    tmp.appendChild(document.createTextNode(a.scoreToAdd));
+    tmp.classList.add('hist-score');
+    innerThings.push(tmp);
+
+    tmp = document.createElement('span')
+    tmp.appendChild(document.createTextNode(players[playerID].playerName));
+    innerThings.push(tmp);
+
+    let outer = document.createElement('p')
+    outer.setAttribute('id', `hist-${currentHistID}`);
+    outer.classList.add('history-entry')
+    outer.classList.add(playerID)
+    innerThings.forEach(each => outer.appendChild(each))
+
+    if (a.isUndone) {
+        outer.classList.add('undone')
+    }
+
+    historyListEl.prepend(outer)
+    document.querySelector("#history-undo").removeAttribute('disabled');
+    document.querySelector("#history-redo").setAttribute('disabled', 'disabled')
 }
 
 function clearUndone() {
     for (; 0 < historyList.length && historyList[historyList.length - 1].isUndone;) historyList.splice(-1);
-    $(".history-entry.undone").slideUp("fast", function () {
-        $(this).remove()
-    })
+    document.querySelectorAll(`.history-entry.undone`).forEach(each => each.remove())
 }
 
-function undoAddScore() {
-    var a = $("#history-undo");
-    $icon = $("#undo-icon");
-    $icon.remove();
-    $newIcon = $icon.clone().addClass("spin").appendTo(a);
-    for (var b = !0, c; b;) c = historyList[currentHistID], c.isUndone ? 0 < currentHistID ? --currentHistID : b = !1 : (players[c.playerID].setTo(c.oldBackPegScore, c.oldScore), $("#hist-" + currentHistID).addClass("undone"), c.isUndone = !0, b = !1);
 
-    0 == currentHistID && a.prop("disabled", !0);
-    $("#history-redo").prop("disabled", !1);
+function undoAddScore() {
+    const undoElem = document.querySelector('#history-undo');
+    for (var b = true, c; b;) {
+        c = historyList[currentHistID];
+        if (c.isUndone) {
+            0 < currentHistID
+                ? --currentHistID
+                : b = false
+        } else {
+            players[c.playerID].setTo(c.oldBackPegScore, c.oldScore);
+            document.querySelector(`#hist-${currentHistID}`).classList.add('undone')
+            c.isUndone = true;
+            b = false;
+        }
+    }
+
+    if (0 === currentHistID) {
+        undoElem.setAttribute('disabled', 'disabled')
+    }
+    document.querySelector('#history-redo').removeAttribute('disabled');
 }
 
 function redoAddScore() {
-    var a = $("#history-redo");
-    $icon = $("#redo-icon");
-    $icon.remove();
-    $newIcon = $icon.clone().addClass("spin").appendTo(a);
-    historyList[currentHistID].isUndone && (a = historyList[currentHistID], players[a.playerID].setTo(a.oldScore, a.newScore), $("#hist-" + currentHistID).removeClass("undone"), historyList[currentHistID].isUndone = !1, currentHistID + 1 < historyList.length ? ++currentHistID : $("#history-redo").prop("disabled", !0));
+    if (historyList[currentHistID].isUndone) {
+        const a = historyList[currentHistID];
+        players[a.playerID].setTo(a.oldScore, a.newScore);
+        document.querySelector(`#hist-${currentHistID}`).classList.remove('undone')
+        historyList[currentHistID].isUndone = false;
+        if (currentHistID + 1 < historyList.length) {
+            ++currentHistID
+        } else {
+            document.querySelector('#history-redo').setAttribute('disabled', 'disabled')
+        }
+    }
 
-    $("#history-undo").prop("disabled", !1);
+    document.querySelector('#history-undo').removeAttribute('disabled');
 }
 
 

@@ -11,7 +11,6 @@ self.addEventListener("install", (event) => {
             "/cribbage/index.html",
             "/cribbage/assets/cribbage_board.js",
             "/cribbage/assets/cribbage_board.min.css",
-            "/cribbage/assets/jquery.min.js",
             "/cribbage/assets/main.min.css",
             "/cribbage/assets/img/board-bkg-classic.png",
             "/cribbage/assets/img/board-bkg-clear.png",
