@@ -3,10 +3,48 @@ class Game {
         this.skin = 'clear';
         this.historyList = [];
         this.currentHistID = undefined;
+        this.players = {p1: undefined, p2: undefined}
+        this.p1 = undefined;
+        this.p2 = undefined;
+    }
+
+    reset() {
+        this.historyList = []
+        this.currentHistID = undefined;
+        this.currentHistID = undefined;
+        this.players = {p1: undefined, p2: undefined}
+        this.p1 = undefined;
+        this.p2 = undefined;
+
+        const p1 = new CribPlayer("p1");
+        const p2 = new CribPlayer("p2");
+        this.players = {p1: p1, p2: p2};
+        this.p1 = p1;
+        this.p2 = p2;
+
+        p1.initialize()
+        p2.initialize();
+        p1.setGame(this);
+        p2.setGame(this);
+
+        // update ui
+        // scores
+        document.querySelectorAll('.score').forEach((each) => each.replaceChildren(document.createTextNode('0')))
+        // history
+        const p = document.createElement('p');
+        p.classList.add('no-history');
+        p.appendChild(document.createTextNode('(none)'))
+
+        document.querySelector('#history-list').replaceChildren(p)
+        document.querySelector('.undo-redo-btn').setAttribute('disabled', 'disabled')
+
+        document.querySelector('#p1-peg-1').dataset.pt = '-1';
+        document.querySelector('#p1-peg-2').dataset.pt = '0';
+        document.querySelector('#p2-peg-1').dataset.pt = '-1';
+        document.querySelector('#p2-peg-2').dataset.pt = '0';
     }
 
     checkWin() {
-        var a, b, c = !1;
         let winner;
         let loser;
         let haveWinner = false;
@@ -38,7 +76,7 @@ class Game {
     redoAddScore() {
         if (this.historyList[this.currentHistID].isUndone) {
             const a = this.historyList[this.currentHistID];
-            players[a.playerID].setTo(a.oldScore, a.newScore);
+            this.players[a.playerID].setTo(a.oldScore, a.newScore);
             document.querySelector(`#hist-${this.currentHistID}`).classList.remove('undone')
             this.historyList[this.currentHistID].isUndone = false;
             if (this.currentHistID + 1 < this.historyList.length) {
@@ -60,7 +98,7 @@ class Game {
                     ? --this.currentHistID
                     : b = false
             } else {
-                players[c.playerID].setTo(c.oldBackPegScore, c.oldScore);
+                this.players[c.playerID].setTo(c.oldBackPegScore, c.oldScore);
                 document.querySelector(`#hist-${this.currentHistID}`).classList.add('undone')
                 c.isUndone = true;
                 b = false;
@@ -93,6 +131,7 @@ class Game {
             }, imagesArray[d].src = a[d]
         }
     }
+
     addToHistoryList(a) {
         this.historyList.push(a);
         this.currentHistID = this.historyList.length - 1;
@@ -106,7 +145,7 @@ class Game {
         innerThings.push(tmp);
 
         tmp = document.createElement('span')
-        tmp.appendChild(document.createTextNode(players[playerID].playerName));
+        tmp.appendChild(document.createTextNode(this.players[playerID].playerName));
         innerThings.push(tmp);
 
         let outer = document.createElement('p')
@@ -133,7 +172,6 @@ var CribPlayer = function (a) {
     this.frontPeg = {};
     this.backPeg = {}
 };
-var p1, p2, players;
 
 CribPlayer.prototype.setGame = function (g) {
     this.game = g;
@@ -146,8 +184,8 @@ CribPlayer.prototype.initialize = function () {
     return this
 };
 CribPlayer.prototype.otherPlayer = function () {
-    var a = p2;
-    "p2" === this.playerID && (a = p1);
+    var a = this.game.p2;
+    "p2" === this.playerID && (a = this.game.p1);
     return a
 };
 CribPlayer.prototype.switchFrontPeg = function () {
@@ -191,9 +229,9 @@ CribPlayer.prototype.setTo = function (a, b) {
 };
 
 
-document.querySelector('.undo-redo-btn').setAttribute('disabled', 'disabled')
-
 // initialize skin by setting the radiobutton correctly
+// We're working a little backwards here -- the source of truth is in the dom, not the game object
+// Set the dom, then Game.updateSkin() reads from the dom and updates game state.
 const initialSkin = localStorage.getItem('cribBoardSkin') ?? 'clear';
 if ('clear' === initialSkin) {
     document.querySelector('#clear-skin').setAttribute('checked', 'true')
@@ -204,23 +242,27 @@ if ('clear' === initialSkin) {
 
 const theGame = new Game();
 theGame.updateSkin();
-const initializePlayers = () => {
-    p1 = new CribPlayer("p1");
-    p2 = new CribPlayer("p2");
-    players = {p1: p1, p2: p2};
+const initializeAllThings = () => {
+    const p1 = new CribPlayer("p1");
+    const p2 = new CribPlayer("p2");
+    theGame.players = {p1: p1, p2: p2};
+    theGame.p1 = p1;
+    theGame.p2 = p2;
+
     p1.initialize()
     p2.initialize();
     p1.setGame(theGame);
     p2.setGame(theGame);
 }
 
-initializePlayers();
-theGame.p1 = p1;
-theGame.p2 = p2;
+initializeAllThings();
+
+
+document.querySelector('.undo-redo-btn').setAttribute('disabled', 'disabled')
 
 document.querySelectorAll('.score-buttons').forEach((each) => each.addEventListener('click', (e, t2) => {
     let b = myParseInt(e.target.dataset.points);
-    (("p1" === e.target.dataset.playerid) ? p1 : p2).addScore(b);
+    (("p1" === e.target.dataset.playerid) ? theGame.p1 : theGame.p2).addScore(b);
 }));
 document.querySelectorAll('input[name="skin"]').forEach((each) => each.addEventListener('change', () => {
     theGame.updateSkin();
@@ -232,6 +274,10 @@ document.querySelector('#history-undo').addEventListener('click', () => {
 })
 document.querySelector('#history-redo').addEventListener('click', () => {
     theGame.redoAddScore()
+})
+
+document.querySelector('#new-game-btn').addEventListener('click', () => {
+    theGame.reset()
 })
 
 const myParseInt = (a) => {
