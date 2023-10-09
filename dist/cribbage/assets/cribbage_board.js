@@ -126,29 +126,26 @@ const theGame = new Game();
 theGame.p1 = p1;
 theGame.p2 = p2;
 
-$(".name-input").on("input", function () {
-    var a = $(this), b = a.data("playerid"), a = escapeHtml(a.val()), a = a.replace(/[ ]/g, "&#8200;");
-    $("#" + b + "-name-spacer").html(a)
-}).keyup(function (a) {
-    27 === a.which && $(this).closest("form").submit()
-}).blur(function () {
-    jsBlur || $(this).closest("form").submit()
-});
-$(".name-input-form").submit(function (a) {
-    a.preventDefault();
-    a = $(this).find(".name-input");
-    var b = a.data("playerid"), c = a.val();
-    0 == c.trim().length && (c = "Player " + ("p1" === b ? "One" : "Two"));
-    players[b].playerName = c;
-    jsBlur = !0;
-    a.val(c).blur();
-    jsBlur = !1;
-    c = escapeHtml(c);
-    $("#" + b + "-name-spacer").html(c);
-    $(".history-entry." + b + " .player-name").html(c);
-    $('label[for="' + b + '-deal"]').html(c);
+// $(".name-input").on("input", function () {
+//     var a = $(this), b = a.data("playerid"), a = escapeHtml(a.val()), a = a.replace(/[ ]/g, "&#8200;");
+//     $("#" + b + "-name-spacer").html(a)
+// })
 
-});
+// $(".name-input-form").submit(function (a) {
+//     a.preventDefault();
+//     a = $(this).find(".name-input");
+//     var b = a.data("playerid"), c = a.val();
+//     0 == c.trim().length && (c = "Player " + ("p1" === b ? "One" : "Two"));
+//     players[b].playerName = c;
+//     jsBlur = !0;
+//     a.val(c).blur();
+//     jsBlur = !1;
+//     c = escapeHtml(c);
+//     $("#" + b + "-name-spacer").html(c);
+//     $(".history-entry." + b + " .player-name").html(c);
+//     $('label[for="' + b + '-deal"]').html(c);
+//
+// });
 document.querySelectorAll('.score-buttons').forEach((each) => each.addEventListener('click', (e, t2) => {
     let b = myParseInt(e.target.dataset.points);
     (("p1" === e.target.dataset.playerid) ? p1 : p2).addScore(b);
