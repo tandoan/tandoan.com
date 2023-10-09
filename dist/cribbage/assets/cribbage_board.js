@@ -50,9 +50,11 @@ var p1, p2, players;
 
 CribPlayer.prototype.initialize = function () {
     for (var a = this.playerID, b = -1; 121 >= b; ++b) this[b] = $("." + a + '-dot[data-pt="' + b + '"]');
-    this.playerName = $("#" + a + "-name").val();
-    this.frontPeg = $("#" + a + "-peg-2");
-    this.backPeg = $("#" + a + "-peg-1");
+
+    this.playerName = document.querySelector(`#${this.playerID}-name`).value;
+    this.frontPeg = document.querySelector(`#${this.playerID}-peg-2`);
+    this.backPeg = document.querySelector(`#${this.playerID}-peg-1`);
+
     return this
 };
 CribPlayer.prototype.otherPlayer = function () {
@@ -72,7 +74,7 @@ CribPlayer.prototype.addScore = function (a) {
         var d = this.playerID, e = this.backPegScore, f = b + a;
         121 <= f && (f = 121, 121 == c && (f = 120));
         this.score = f;
-        $("#" + d + "-area .score").text(f);
+        document.querySelector(`#${d}-area .score`).replaceChildren(document.createTextNode(f))
         checkWin();
         c = {};
         c.playerID = this.playerID;
@@ -81,7 +83,7 @@ CribPlayer.prototype.addScore = function (a) {
         c.scoreToAdd = a;
         c.newScore = f;
         c.isUndone = !1;
-        this.backPeg.attr("data-pt", f);
+        this.backPeg.setAttribute('data-pt', f)
         this.switchFrontPeg();
         this.backPegScore = b;
         addToHistoryList(c);
@@ -90,8 +92,8 @@ CribPlayer.prototype.addScore = function (a) {
 };
 CribPlayer.prototype.setTo = function (a, b) {
     var c = this.playerID;
-    this.frontPeg.attr("data-pt", a);
-    this.backPeg.attr("data-pt", b);
+    this.frontPeg.setAttribute('data-pt', a)
+    this.backPeg.setAttribute('data-pt', b)
     this.switchFrontPeg();
     $("#" + c + "-area .score").text(b);
     121 == b && this[b].addClass("game-over").addClass(c + "-wins");
@@ -122,13 +124,7 @@ const initializePlayers = () => {
     p2.initialize();
 }
 
-// document.querySelector('#new-game').addEventListener('click', () => {
-//     initializePlayers();
-//     historyList = [];
-// })
 initializePlayers();
-// p1.initialize();
-// p2.initialize();
 const theGame = new Game();
 theGame.p1 = p1;
 theGame.p2 = p2;
