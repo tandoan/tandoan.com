@@ -42,6 +42,14 @@ class Game {
         document.querySelector('#p1-peg-2').dataset.pt = '0';
         document.querySelector('#p2-peg-1').dataset.pt = '-1';
         document.querySelector('#p2-peg-2').dataset.pt = '0';
+
+        this.resetWinnerUI();
+    }
+
+    resetWinnerUI() {
+        document.querySelector('.score.winner')?.classList.remove('winner')
+        document.querySelector('.skunked')?.classList.remove('skunked')
+        document.querySelector('.doubleskunked')?.classList.remove('doubleskunked')
     }
 
     checkWin() {
@@ -67,9 +75,7 @@ class Game {
                 document.querySelector(`#${loser.playerID}-area`).classList.add('doubleskunked');
             }
         } else {
-            document.querySelector('.score.winner')?.classList.remove('winner')
-            document.querySelector('.skunked')?.classList.remove('sknunked')
-            document.querySelector('.doubleskunked')?.classList.remove('doubleskunked')
+            this.resetWinnerUI();
         }
     }
 
