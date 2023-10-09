@@ -32,14 +32,6 @@
     padding-bottom: 1.61778%
 }
 
-.dot .dot-droppable {
-    position: absolute;
-    top: -14%;
-    right: -14%;
-    bottom: -14%;
-    left: -14%
-}
-
 .peg {
     -webkit-transition: -webkit-transform 0.42s;
     transition: -webkit-transform 0.42s;
