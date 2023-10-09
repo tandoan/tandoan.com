@@ -223,7 +223,6 @@ function undoAddScore() {
 
     0 == currentHistID && a.prop("disabled", !0);
     $("#history-redo").prop("disabled", !1);
-    scrollHist()
 }
 
 function redoAddScore() {
@@ -234,15 +233,6 @@ function redoAddScore() {
     historyList[currentHistID].isUndone && (a = historyList[currentHistID], players[a.playerID].setTo(a.oldScore, a.newScore), $("#hist-" + currentHistID).removeClass("undone"), historyList[currentHistID].isUndone = !1, currentHistID + 1 < historyList.length ? ++currentHistID : $("#history-redo").prop("disabled", !0));
 
     $("#history-undo").prop("disabled", !1);
-    scrollHist()
-}
-
-function scrollHist() {
-    if (0 < currentHistID) {
-        var a = $("#hist-" + (currentHistID - 1)), b = a.position().top, a = b + a.innerHeight(),
-            c = $("#history-list"), d = c.scrollTop(), e = c.height();
-        0 > b ? c.animate({scrollTop: d + b - 24}, 250) : a > e && c.animate({scrollTop: d + (b - e) + 24}, 250)
-    }
 }
 
 
