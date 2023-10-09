@@ -16,9 +16,9 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "/cribbage/",
+  "start_url": "/cribbage/index.html",
   "background_color": "#ffffff",
-  "display": "minimal-ui",
+  "display": "fullscreen",
   "scope": "/cribbage/",
   "theme_color": "#ffffff",
   "shortcuts": [
