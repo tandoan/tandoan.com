@@ -49,8 +49,6 @@ var CribPlayer = function (a) {
 var p1, p2, players;
 
 CribPlayer.prototype.initialize = function () {
-    for (var a = this.playerID, b = -1; 121 >= b; ++b) this[b]=document.querySelector(`.${a}-dot[data-pt="${b}"]`);
-
     this.playerName = document.querySelector(`#${this.playerID}-name`).value;
     this.frontPeg = document.querySelector(`#${this.playerID}-peg-2`);
     this.backPeg = document.querySelector(`#${this.playerID}-peg-1`);
@@ -95,8 +93,7 @@ CribPlayer.prototype.setTo = function (a, b) {
     this.frontPeg.setAttribute('data-pt', a)
     this.backPeg.setAttribute('data-pt', b)
     this.switchFrontPeg();
-    $("#" + c + "-area .score").text(b);
-    121 == b && this[b].addClass("game-over").addClass(c + "-wins");
+    document.querySelector("#" + c + "-area .score").replaceChildren(document.createTextNode(b))
     this.backPegScore = a;
     this.score = b;
     checkWin();
@@ -152,20 +149,22 @@ $(".name-input-form").submit(function (a) {
     $('label[for="' + b + '-deal"]').html(c);
 
 });
-$(".add-score").click(function () {
-    var a = $(this), b = myParseInt(a.data("points"));
-    ("p1" === a.data("playerid") ? p1 : p2).addScore(b)
-});
-$('input[name="skin"]').change(function () {
+document.querySelectorAll('.score-buttons').forEach((each) => each.addEventListener('click', (e, t2) => {
+    let b = myParseInt(e.target.dataset.points);
+    (("p1" === e.target.dataset.playerid) ? p1 : p2).addScore(b);
+}));
+document.querySelectorAll('input[name="skin"]').forEach((each) => each.addEventListener('change', () => {
     updateSkin();
     localStorage.setItem('cribBoardSkin', currentSkin);
-});
-$("#history-undo").click(function () {
+}));
+
+document.querySelector('#history-undo').addEventListener('click', () => {
     undoAddScore()
-});
-$("#history-redo").click(function () {
+})
+document.querySelector('#history-redo').addEventListener('click', () => {
     redoAddScore()
-});
+})
+
 
 function checkWin() {
     return theGame.checkWin()
